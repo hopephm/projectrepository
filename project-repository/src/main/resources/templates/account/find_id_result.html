@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Repository: Find Id Result</title>
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+    <ul th:each="id : ${idList}">
+        <li th:text="${id}"></li>
+    </ul>
+</body>
+</html>

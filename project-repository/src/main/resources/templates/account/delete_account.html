@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+  <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+  <title>Project Repository: Delete Account</title>
+</head>
+<body>
+  <div th:replace="layout/header::header"></div>
+  <div class="delete_account">
+    <h3>회원 탈퇴</h3>
+    <table>
+      <tr>
+        <th colspan="2" class="content_disc">탈퇴 시, 작성된 모든 게시물이 삭제 됩니다.</th>
+      </tr>
+      <tr>
+        <td colspan="2" class="content_square">그래도 탈퇴하시겠습니까?</td>
+      </tr>
+      <tr>
+        <td class="square">
+          <button class="yes_btn">예</button>
+        </td>
+        <td class="square">
+          <button class="no_btn">아니오</button>
+        </td>
+      </tr>
+
+    </table>
+
+  </div>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script th:src="@{/js/util/csrf.js}"></script>
+  <script th:src="@{/js/account/delete_account.js}"></script>
+</body>
+</html>

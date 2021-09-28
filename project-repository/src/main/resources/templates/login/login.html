@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Repository: Login</title>
+</head>
+<body>
+<div th:replace="layout/header::header"></div>
+
+<div class="account">
+    <h3>계정 서비스</h3>
+    <table>
+        <tr>
+            <td class="disc">
+                <a href="/create_account">Create Account</a>
+            </td>
+            <td class="disc white_border">
+                <a href="/find/id">Find ID</a>
+            </td>
+            <td class="disc">
+                <a href="/find/pw">Find PW</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="normal_login">
+    <h3>일반 로그인</h3>
+    <form th:action="@{/login}" method="post">
+        <table>
+            <tr>
+                <th class="disc">id</th>
+                <td>
+                    <input id="username" name="username" type="text">
+                </td>
+            </tr>
+            <tr>
+                <th class="disc">password</th>
+                <td>
+                    <input id="password" name="password" type="password">
+                </td>
+                <td>
+                    <input type="submit" value="login">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div class="oauth2_login">
+<!--    나중에 경로 js로 바꾸자-->
+    <h3>OAuth2 로그인</h3>
+    <table>
+        <tr>
+            <td class="disc">
+                <a href="/oauth2/authorization/google" class="btn_social">
+                    Google Login
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="disc white_border">
+                <a href="/oauth2/authorization/facebook" class="btn_social">
+                    Facebook Login
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="disc white_border">
+                <a href="/oauth2/authorization/naver" class="btn_social">
+                    Naver Login
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="disc">
+                <a href="/oauth2/authorization/kakao" class="btn_social">
+                    Kakao Login
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    alert("로그인이 필요합니다.");
+</script>
+
+<p th:if="${loginError}" class="error">Wrong user or password</p>
+</body>
+</html>

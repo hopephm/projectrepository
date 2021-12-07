@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09ff75ab-9ecc-452d-9527-7fc8ea73e38e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/service/FileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/controller/mvc/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/controller/mvc/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/controller/mvc/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/controller/mvc/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/java/com/hope/projectrepository/service/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/application-ec2.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/static/css/basic.css" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/static/css/basic.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/account/create_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/account/create_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/project/project_lookup.html" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/project/project_lookup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/project/project_search.html" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/project/project_search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/project/project_upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates/project/project_upload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +37,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/projectrepository" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="21wyB5SnBD1A7KFLzxFz7G13xWG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">

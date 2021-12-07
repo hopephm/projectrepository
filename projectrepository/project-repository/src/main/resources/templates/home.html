@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Repository: Home</title>
+</head>
+<body>
+    <div th:replace="layout/header::header"></div>
+
+    <table>
+        <tr>
+            <td class="square" sec:authorize="!isAuthenticated()">
+                <a href="/login">Login</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="square" sec:authorize="isAuthenticated()">
+                <a href="/logout">Logout</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="square" sec:authorize="isAuthenticated()">
+                <a href="/delete_account">Delete Account</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="square">
+                <a href="/search">Search Project</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="square">
+                <a href="/upload">Upload Project</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

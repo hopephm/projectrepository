@@ -1,6 +1,6 @@
 package com.hope.projectrepository.util.comparator;
 
-import com.hope.projectrepository.domain.ProjectContent;
+import com.hope.projectrepository.domain.entity.ProjectContent;
 
 import java.util.Comparator;
 

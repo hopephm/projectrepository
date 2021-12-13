@@ -1,6 +1,6 @@
 package com.hope.projectrepository.util.comparator;
 
-import com.hope.projectrepository.domain.ProjectOverview;
+import com.hope.projectrepository.domain.entity.ProjectOverview;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;

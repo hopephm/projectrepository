@@ -1,6 +1,6 @@
 package com.hope.projectrepository.util;
 
-import com.hope.projectrepository.domain.User;
+import com.hope.projectrepository.domain.entity.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.context.request.RequestContextHolder;

@@ -1,6 +1,6 @@
 package com.hope.projectrepository.controller.mvc;
 
-import com.hope.projectrepository.domain.service.account.LagacyAccountServiceImpl;
+import com.hope.projectrepository.domain.service.account.implementation.LagacyAccountServiceImpl;
 import com.hope.projectrepository.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+
+
+// Service 객체에서 반환하는 Exception에 따라 반환결과 차이
 
 @Controller
 public class AccountController {
@@ -38,9 +41,9 @@ public class AccountController {
     @GetMapping("/find/id/result")
     public String findIdResult(Model model,
                                @RequestParam("user_email") String email){
-        List<String> idList = accountService.findId(email);
-        
-        // 아이디 미존재 예외
+
+        List<String> idList = accountService.findAccountIdByEmail(email);
+
         model.addAttribute("idList", idList);
         return "account/find_id_result";
     }
@@ -98,13 +101,15 @@ public class AccountController {
     public @ResponseBody String sendAccountVerificationCode(Model model,
                                                             @RequestParam("user_id") String loginId,
                                                             @RequestParam("user_email") String email){
-        // 추상화 수준이 안맞음
-        String result = accountService.checkAccount(loginId, email);
+//        accountService.startFindAccountPw(loginId, email);
 
-        // 핸들링
-        if(result == Result.SUCCESS){
-            accountService.sendVerificationCode(email, loginId);
-        }
+//        // 추상화 수준이 안맞음
+//        String result = accountService.checkAccount(loginId, email);
+//
+//        // 핸들링
+//        if(result == Result.SUCCESS){
+//            accountService.sendVerificationCode(email, loginId);
+//        }
 
         return Result.SUCCESS;
     }
@@ -113,13 +118,14 @@ public class AccountController {
     public @ResponseBody String verifyAccount(Model model,
                                               @RequestParam("user_id") String loginId,
                                               @RequestParam("verify_code") String code){
+//        accountService.finishFindAccountPw(loginId, code);
 
-        // 추상화 수준이 안맞음
-        String result = accountService.verifyCode(loginId, code);
-
-        if(result == Result.SUCCESS) {
-            accountService.addResetAccount(loginId);
-        }
+//        // 추상화 수준이 안맞음
+//        String result = accountService.verifyCode(loginId, code);
+//
+//        if(result == Result.SUCCESS) {
+//            accountService.addResetAccount(loginId);
+//        }
 
         return Result.SUCCESS;
     }

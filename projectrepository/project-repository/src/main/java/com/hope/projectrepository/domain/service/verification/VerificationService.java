@@ -45,7 +45,7 @@ public class VerificationService {
 
     public String verifyRandomCode(String key, String randomCode){
         VerifyInfo info = verifyCodeStorage.get(key);
-        
+
         // 미존재 에러
         if(info == null){
             return Result.FAIL;
@@ -87,3 +87,5 @@ class VerifyInfo{
     String code;
     LocalDateTime validity;
 }
+
+

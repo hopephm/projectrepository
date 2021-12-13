@@ -1,4 +1,4 @@
-package com.hope.projectrepository.domain.service.account;
+package com.hope.projectrepository.domain.service.account.implementation;
 
 import com.hope.projectrepository.domain.entity.FileInfo;
 import com.hope.projectrepository.domain.entity.ProjectContent;
@@ -104,7 +104,7 @@ public class LagacyAccountServiceImpl {
         return Result.SUCCESS;
     }
 
-    public List<String> findId(String email){
+    public List<String> findAccountIdByEmail(String email){
         List<User> users = userRepository.findByEmail(email);
 
         List<String> ids = new ArrayList<>();
@@ -118,7 +118,7 @@ public class LagacyAccountServiceImpl {
 
     public String sendVerificationCode(String email, String key){
         String randomCode = verificationService.createRandomCode(key);
-        mailService.sendRandomCode(email, randomCode);
+        mailService.sendVerificationMail(email, randomCode);
 
         return randomCode;
     }

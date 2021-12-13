@@ -23,10 +23,10 @@ public class MailService{
         mailSender.send(message);
     }
 
-    public void sendRandomCode(String to, String randomCode){
+    public void sendVerificationMail(String to, String verificationCode){
         String subject = "Project Repository: 인증코드";
         String text = "인증코드: ";
-        text += randomCode;
+        text += verificationCode;
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(FROM);

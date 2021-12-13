@@ -40,6 +40,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="21wyB5SnBD1A7KFLzxFz7G13xWG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -56,14 +64,14 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.hope.projectrepository.config.domain" />
-      <recent name="com.hope.projectrepository.config.oauth2" />
-      <recent name="com.hope.projectrepository.config.web" />
-      <recent name="com.hope.projectrepository.config" />
-      <recent name="com.hope.projectrepository.domain" />
+      <recent name="com.hope.projectrepository.domain.service.account.implementation" />
+      <recent name="com.hope.projectrepository.domain.service.account.manager.implementation" />
+      <recent name="com.hope.projectrepository.domain.service.account.verifier.implementation" />
+      <recent name="com.hope.projectrepository.domain.service.account.verifier" />
+      <recent name="com.hope.projectrepository.compatibility" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AccountTest.deleteCurrentAccountTest">
+  <component name="RunManager" selected="Gradle.AccountTest.sendVerificationCodeTest">
     <configuration name="ProjectRepositoryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.hope.projectrepository.ProjectRepositoryApplication" />
       <module name="project-repository.main" />
@@ -140,11 +148,33 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="AccountTest.sendVerificationCodeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.sendVerificationCodeTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AccountTest.deleteCurrentAccountTest" />
+        <item itemvalue="Gradle.AccountTest.sendVerificationCodeTest" />
         <item itemvalue="Gradle.AccountTest" />
         <item itemvalue="Gradle.AccountTest.createAccountTest" />
+        <item itemvalue="Gradle.AccountTest.deleteCurrentAccountTest" />
         <item itemvalue="Application.ProjectRepositoryApplication" />
       </list>
     </recent_temporary>

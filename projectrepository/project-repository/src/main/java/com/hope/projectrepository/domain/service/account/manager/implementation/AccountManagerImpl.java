@@ -1,12 +1,13 @@
-package com.hope.projectrepository.domain.service.account.manager;
+package com.hope.projectrepository.domain.service.account.manager.implementation;
 
 import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.domain.entity.enums.RoleType;
 import com.hope.projectrepository.domain.repository.UserRepository;
+import com.hope.projectrepository.domain.service.account.manager.AccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class AccountManagerImpl implements AccountManager{
+public class AccountManagerImpl implements AccountManager {
     @Autowired
     PasswordEncoder pwEncoder;
 

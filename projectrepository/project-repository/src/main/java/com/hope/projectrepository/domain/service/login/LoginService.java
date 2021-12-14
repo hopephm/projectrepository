@@ -29,7 +29,6 @@ public class LoginService implements UserDetailsService{
     private static final String NAVER = "naver";
     private static final String KAKAO = "kakao";
 
-
     @Autowired
     UserRepository userRepository;
 

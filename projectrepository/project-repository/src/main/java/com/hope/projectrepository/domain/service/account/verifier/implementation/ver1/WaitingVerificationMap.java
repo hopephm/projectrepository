@@ -1,4 +1,4 @@
-package com.hope.projectrepository.domain.service.account.verifier.implementation;
+package com.hope.projectrepository.domain.service.account.verifier.implementation.ver1;
 
 import java.util.HashMap;
 

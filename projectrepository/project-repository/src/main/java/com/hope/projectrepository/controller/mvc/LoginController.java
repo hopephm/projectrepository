@@ -11,13 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
-    @Autowired
-    private LoginService loginService;
-
     @GetMapping("/login")
     public String unitedLoginPage(Model model){
-//        미존재 아이디 핸들링
-//        계정정보 불일치 핸들링
         return "login/login";
     }
 

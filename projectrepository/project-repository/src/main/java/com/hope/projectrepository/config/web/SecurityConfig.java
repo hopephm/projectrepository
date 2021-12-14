@@ -86,6 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             this.loginType = loginType;
             setDefaultTargetUrl(defaultTargetUrl);
         }
+
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
                 throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package com.hope.projectrepository.domain.service.account.verifier.implementation;
+package com.hope.projectrepository.domain.service.account.verifier.implementation.ver1;
 
 import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.domain.service.account.verifier.AccountVerifier;
@@ -7,7 +7,6 @@ import com.hope.projectrepository.util.RandomCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.net.UnknownServiceException;
 import java.time.LocalDateTime;
 
 public class AccountVerifierImpl implements AccountVerifier {
@@ -22,7 +21,14 @@ public class AccountVerifierImpl implements AccountVerifier {
     private int limitTime;
 
     public void sendVerificationCode(String email){
-        String verificationCode = createVerifiactionCode(email);
+        String key = email;
+        String verificationCode = createVerifiactionCode(key);
+        mailService.sendVerificationMail(email, verificationCode);
+    }
+
+    public void sendVerificationCode(String email, String loginId){
+        String key = loginId;
+        String verificationCode = createVerifiactionCode(key);
         mailService.sendVerificationMail(email, verificationCode);
     }
 
@@ -33,9 +39,9 @@ public class AccountVerifierImpl implements AccountVerifier {
         return verificationCode;
     }
 
-    public void checkVerifyCode(String email, String code) throws Exception{
-        VerifyInfo info = waitingVerificationMap.get(email);
-        waitingVerificationMap.remove(email);
+    public void verifyCode(String key, String code) throws Exception{
+        VerifyInfo info = waitingVerificationMap.get(key);
+        waitingVerificationMap.remove(key);
 
         if(isNotExist(info))
             throw new Exception();      // 이메일 정보 예외
@@ -61,6 +67,10 @@ public class AccountVerifierImpl implements AccountVerifier {
         if(givenCode.equals(realCode))
             return true;
         return false;
+    }
+
+    public void sendPassword(User user, String pw){
+        mailService.sendNewPassword(user.getLoginId(), user.getEmail(), pw);
     }
 }
 

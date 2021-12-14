@@ -4,22 +4,26 @@ import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.compatibility.dto.AccountDTO;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface AccountService {
     // 실 계정 생성
-    public User createAccount(AccountDTO accountDTO) throws Exception;
+    public User createAccount(AccountDTO accountDTO);
     
     // 실 계정 삭제
-    public void deleteCurrentAccount(HttpSession session) throws Exception;
+    public void deleteCurrentAccount();
+    public void deleteAccount(HttpSession session);
     
     // 이메일 인증 과정
-    public void sendVerificationCodeForCheckEmail(String email) throws Exception;
-    public void verifyCodeForCheckEmail(String email, String code) throws Exception;
+    public void sendVerificationCode(String email, String key);
+    public void verifyCode(String key, String code) throws Exception;
     
     // findID 과정
-    public void findAccountIdByEmail(String email) throws Exception;
-    
+    public List<String> findAccountIdByEmail(String email);
+
     // findPW 과정
-    public void startFindAccountPw(String loginId, String email) throws Exception;
-    public void finishFindAccountPw(String loginId, String code) throws Exception;
+    public void checkAccount(String email, String loginId) throws Exception;
+    public void putAccountToWaitingResetPwMap(String loginId);
+    public void resetAndSendPassword(String loginId) throws Exception;
+
 }

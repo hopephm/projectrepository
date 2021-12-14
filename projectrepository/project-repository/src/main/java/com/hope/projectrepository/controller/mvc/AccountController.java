@@ -1,7 +1,9 @@
 package com.hope.projectrepository.controller.mvc;
 
-import com.hope.projectrepository.domain.service.account.implementation.LagacyAccountServiceImpl;
+import com.hope.projectrepository.compatibility.dto.AccountDTO;
+import com.hope.projectrepository.domain.service.account.AccountService;
 import com.hope.projectrepository.util.Result;
+import com.hope.projectrepository.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,8 @@ import java.util.List;
 @Controller
 public class AccountController {
     @Autowired
-    LagacyAccountServiceImpl accountService;
+    AccountService accountService;
+//    LagacyAccountServiceImpl accountService;
 
     ///*                *///
     //         Get        //
@@ -43,8 +46,8 @@ public class AccountController {
                                @RequestParam("user_email") String email){
 
         List<String> idList = accountService.findAccountIdByEmail(email);
-
         model.addAttribute("idList", idList);
+
         return "account/find_id_result";
     }
 
@@ -64,7 +67,8 @@ public class AccountController {
     ///*                *///
     @PostMapping("/delete_account")
     public @ResponseBody String deleteAccount(HttpServletRequest request, HttpServletResponse response){
-        accountService.deleteAccount(request, response);
+        accountService.deleteCurrentAccount();
+        Util.logout(request, response);
         return Result.SUCCESS;      // 핸들링
     }
 
@@ -74,69 +78,89 @@ public class AccountController {
                                               @RequestParam("user_password") String password,
                                               @RequestParam("user_email") String email,
                                               @RequestParam("user_nickname") String nickname){
-        // DTO로 파라미터 변경 (현재 컨트롤러 자체 + createAccount 호출 둘 다)
-        accountService.createAccount(loginId, password, email, nickname);
+//        파라미터를 DTO로 변경
+
+        AccountDTO accountDTO = new AccountDTO(loginId, password, email, nickname);
+        accountService.createAccount(accountDTO);
         return Result.SUCCESS;      // 핸들링
     }
 
-    // 이걸 왜 프론트에서 요청받아서 하지
     @PostMapping("/verify/email/send")
-    public @ResponseBody String sendVerificationCode(Model model,
+    public @ResponseBody String sendEmailVerificationCode(Model model,
                                                      @RequestParam("user_email") String email){
         accountService.sendVerificationCode(email, email);
-        return Result.SUCCESS;  // 핸들링
+        return Result.SUCCESS;
     }
 
     @PostMapping("/verify/email/verify")
     public @ResponseBody String verifyCode(Model model,
                                            @RequestParam("user_email") String email,
                                            @RequestParam("verify_code") String code){
-        accountService.verifyCode(email, code);
+        try{
+            accountService.verifyCode(email, code);
+        }catch(Exception e){
+            // 실패시 return a
+            // 실패시 return b
 
-        // 결과 보내는 곳부터 핸들링
+        }
+
         return Result.SUCCESS;
     }
+
+
+//    pw 찾기는 과정 변경 필요
+//    1. 계정 존재여부 확인 (loginId, email);
+//    2. 이메일 인증 코드 전송(email)
+//    2. 이메일 코드 확인 (email, code) -> email 검증과 같은 함수 및 같은 과정
+//    3. pw 변경 및 변경 내용 전송 (loginId, email)
+
 
     @PostMapping("/verify/find/pw")
-    public @ResponseBody String sendAccountVerificationCode(Model model,
+    public @ResponseBody String checkAccount(Model model,
                                                             @RequestParam("user_id") String loginId,
                                                             @RequestParam("user_email") String email){
-//        accountService.startFindAccountPw(loginId, email);
-
-//        // 추상화 수준이 안맞음
-//        String result = accountService.checkAccount(loginId, email);
-//
-//        // 핸들링
-//        if(result == Result.SUCCESS){
-//            accountService.sendVerificationCode(email, loginId);
-//        }
-
+        // accountService.checkAccount(loginId, email);
         return Result.SUCCESS;
     }
 
-    @PostMapping("/verify/find/pw/verify")
-    public @ResponseBody String verifyAccount(Model model,
-                                              @RequestParam("user_id") String loginId,
-                                              @RequestParam("verify_code") String code){
-//        accountService.finishFindAccountPw(loginId, code);
+    /*
+        프론트 :
+            pw 찾기 클릭 시 check Account
+            존재시 >> 이메일 인증 발송 버튼 생성 + 인증 코드 입력창 생성
+            인증코드 일치시 >> pw 초기화 및 전송 버튼 생성
+            pw 초기화 클릭시 >> 초기화된 번호 전송
 
-//        // 추상화 수준이 안맞음
-//        String result = accountService.verifyCode(loginId, code);
-//
-//        if(result == Result.SUCCESS) {
-//            accountService.addResetAccount(loginId);
-//        }
+        현재 프론트 부터 하면 됨
+     */
 
-        return Result.SUCCESS;
-    }
+
+    /*
+            위에 있는
+            accountService.sendVerificationCode(email, loginId);
+
+            accountService.verifyCode(loginId, code);
+            예외 없는 경우 실행 >> accountService.putAccountToWaitingResetPwMap(loginId);
+
+            accountService.resetPwAndSendNewPw(loginId);
+            사용 
+     */
 
     @PostMapping("/verify/find/pw/reset")
     public @ResponseBody String resetPw(Model model,
                                         @RequestParam("user_id") String loginId,
                                         @RequestParam("user_email") String email){
-        String result = accountService.resetPw(loginId, email);
+        // accountService.resetPwAndSendNewPw(loginId);
+            // 내부적으로 reset PW, send PW로 구성
+        return Result.SUCCESS;
+    }
 
-        // 핸들링
+    
+    // 추후 아래 맵핑정보 삭제
+    @PostMapping("/verify/find/pw/verify")
+    public @ResponseBody String verifyAccount(Model model,
+                                              @RequestParam("user_id") String loginId,
+                                              @RequestParam("verify_code") String code){
+
         return Result.SUCCESS;
     }
 }

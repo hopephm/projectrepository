@@ -20,6 +20,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/projectrepository/project-repository">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -65,13 +68,13 @@
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.hope.projectrepository.domain.service.account.implementation" />
+      <recent name="com.hope.projectrepository.domain.service.account.verifier.implementation.ver1" />
+      <recent name="com.hope.projectrepository.domain.service.account.manager.implementation.ver1" />
+      <recent name="com.hope.projectrepository.domain.service.account.implementation.ver1" />
       <recent name="com.hope.projectrepository.domain.service.account.manager.implementation" />
-      <recent name="com.hope.projectrepository.domain.service.account.verifier.implementation" />
-      <recent name="com.hope.projectrepository.domain.service.account.verifier" />
-      <recent name="com.hope.projectrepository.compatibility" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AccountTest.sendVerificationCodeTest">
+  <component name="RunManager" selected="Application.ProjectRepositoryApplication">
     <configuration name="ProjectRepositoryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.hope.projectrepository.ProjectRepositoryApplication" />
       <module name="project-repository.main" />
@@ -106,12 +109,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AccountTest.createAccountTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountTest.ownerVerificationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.createAccountTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.ownerVerificationTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -127,12 +130,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AccountTest.deleteCurrentAccountTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountTest.resetPwTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.deleteCurrentAccountTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.resetPwTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -148,12 +151,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AccountTest.sendVerificationCodeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountTest.startFindPwTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.sendVerificationCodeTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.startFindPwTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -171,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AccountTest.sendVerificationCodeTest" />
+        <item itemvalue="Gradle.AccountTest.resetPwTest" />
         <item itemvalue="Gradle.AccountTest" />
-        <item itemvalue="Gradle.AccountTest.createAccountTest" />
-        <item itemvalue="Gradle.AccountTest.deleteCurrentAccountTest" />
+        <item itemvalue="Gradle.AccountTest.ownerVerificationTest" />
         <item itemvalue="Application.ProjectRepositoryApplication" />
+        <item itemvalue="Gradle.AccountTest.startFindPwTest" />
       </list>
     </recent_temporary>
   </component>

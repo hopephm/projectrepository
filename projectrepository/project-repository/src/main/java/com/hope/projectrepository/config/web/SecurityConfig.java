@@ -3,7 +3,7 @@ package com.hope.projectrepository.config.web;
 import static com.hope.projectrepository.domain.entity.enums.RoleType.NORMAL_USER;
 import static com.hope.projectrepository.domain.entity.enums.RoleType.ADMIN;
 
-import com.hope.projectrepository.domain.service.login.LoginService;
+import com.hope.projectrepository.filter.LoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public String[] publicPath;
 
     @Autowired
-    LoginService loginService;
+    LoginFilter loginService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,22 +54,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .oauth2Login()
                 .loginPage("/login")
-                .successHandler(new LoginSuccessHandler("/login/success", OAUTH2)) // 로그인 성공 핸들링
+                .successHandler(new LoginSuccessHandler("/", OAUTH2))
                 .failureUrl("/login/fail")
             .and()
                 .formLogin()
-                .loginPage("/login")                    // basic login url
-                .loginProcessingUrl("/login")           // post로 로그인 처리할 url
-                .successHandler(new LoginSuccessHandler("/login/success", FORM)) // 로그인 성공 핸들링
-                .failureUrl("/login/fail")              // 로그인 실패시 redirect 될 url
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .successHandler(new LoginSuccessHandler("/", FORM))
+                .failureUrl("/login/fail")
                 .permitAll()
             .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/logout/success")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
             .and()
-                .exceptionHandling().accessDeniedPage("/denied")
+                .exceptionHandling().accessDeniedPage("/exception/denied")
         ;
 
     }

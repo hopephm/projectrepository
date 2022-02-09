@@ -6,6 +6,16 @@
 </head>
 <body>
 <div th:replace="layout/header::header"></div>
-        변경된 패스워드를 이메일로 전송하였습니다.
+    <h3>변경된 계정정보</h3>
+    <table>
+        <tr>
+            <th class="disc">id</th>
+            <td th:text="${id}"></td>
+        </tr>
+        <tr>
+            <th class="disc">password</th>
+            <td th:text="${pw}"></td>
+        </tr>
+    </table>
 </body>
 </html>

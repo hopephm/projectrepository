@@ -14,5 +14,5 @@ public class ProjectDTO {
     private String scale;
     private String startDate;
     private String endDate;
-    private ContentDTO[] contentDTOS;
+    private ProjectContentDTO[] contentDTOS;
 }

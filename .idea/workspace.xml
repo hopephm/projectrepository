@@ -35,6 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
+        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -66,15 +68,21 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\test\java\com\hope\projectrepository\exception" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\main\resources\templates.exception" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.hope.projectrepository.domain.service.account.implementation" />
-      <recent name="com.hope.projectrepository.domain.service.account.verifier.implementation.ver1" />
-      <recent name="com.hope.projectrepository.domain.service.account.manager.implementation.ver1" />
-      <recent name="com.hope.projectrepository.domain.service.account.implementation.ver1" />
-      <recent name="com.hope.projectrepository.domain.service.account.manager.implementation" />
+      <recent name="com.hope.projectrepository.util.response.data" />
+      <recent name="com.hope.projectrepository.util.response.json" />
+      <recent name="com.hope.projectrepository.util.global" />
+      <recent name="com.hope.projectrepository.domain.service.project.file" />
+      <recent name="com.hope.projectrepository.domain.service.project.finder" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ProjectRepositoryApplication">
+  <component name="RunManager" selected="Gradle.JsonTests.Test2">
     <configuration name="ProjectRepositoryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.hope.projectrepository.ProjectRepositoryApplication" />
       <module name="project-repository.main" />
@@ -88,12 +96,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccountTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountControllerTests.createAccountNicknameDuplicateFailureTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.controller.AccountControllerTests.createAccountNicknameDuplicateFailureTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -109,12 +117,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AccountTest.ownerVerificationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountControllerTests.deleteAccountAccountDoesNotExistExceptionFailureTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.ownerVerificationTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.controller.AccountControllerTests.deleteAccountAccountDoesNotExistExceptionFailureTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -130,12 +138,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AccountTest.resetPwTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="JsonTests.Test2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.resetPwTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.util.JsonTests.Test2&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -151,12 +159,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AccountTest.startFindPwTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="JsonTests.jsonTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.service.AccountTest.startFindPwTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.util.JsonTests.jsonTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -174,11 +182,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AccountTest.resetPwTest" />
-        <item itemvalue="Gradle.AccountTest" />
-        <item itemvalue="Gradle.AccountTest.ownerVerificationTest" />
+        <item itemvalue="Gradle.JsonTests.Test2" />
+        <item itemvalue="Gradle.JsonTests.jsonTest" />
         <item itemvalue="Application.ProjectRepositoryApplication" />
-        <item itemvalue="Gradle.AccountTest.startFindPwTest" />
+        <item itemvalue="Gradle.AccountControllerTests.deleteAccountAccountDoesNotExistExceptionFailureTest" />
+        <item itemvalue="Gradle.AccountControllerTests.createAccountNicknameDuplicateFailureTest" />
       </list>
     </recent_temporary>
   </component>

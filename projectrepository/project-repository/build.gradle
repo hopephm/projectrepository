@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.google.code.gson:gson:2.8.5'
 	implementation 'org.json:json:20190722'
 	implementation 'commons-io:commons-io:2.11.0'
 	implementation 'org.springframework.security:spring-security-oauth2-client'
@@ -29,6 +30,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'

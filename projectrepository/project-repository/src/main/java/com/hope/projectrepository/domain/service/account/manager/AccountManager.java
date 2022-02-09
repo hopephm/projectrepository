@@ -11,6 +11,8 @@ public interface AccountManager {
     public List<String> findAccountIdByEmail(String email);
     public User findUserByLoginId(String loginId);
     public User checkAccount(String email, String loginId);
-    public String resetPassword(User user) throws Exception;
-    public void putAccountToWaitingResetPwMap(User user);
+    public String resetPw(String resetKey);
+    public String changeAccountStateToResetPw(User user);
+    public User getUserByLoginId(String loginId);
+    public User getUserByNickname(String nickname);
 }

@@ -25,7 +25,7 @@ const join_btn = document.querySelector(".join_btn");
 
 var attr_check = "check";
 var fail = "fail";
-var success = "success";
+var success = "000";
 
 function status_init(){
     nickname.setAttribute(attr_check, fail);
@@ -58,15 +58,11 @@ function duplicated_check(item_element, value, item_name, check_url){
 
 function nicknameCheckBtnOnClickHandler(event){
     var val = nickname_input.value;
-
-
     duplicated_check(nickname, val, "닉네임", "/user/duplicated/nickname");
 }
 
 function idCheckBtnOnClickHandler(event){
     var val = id_input.value;
-
-
     duplicated_check(id, val, "아이디", "/user/duplicated/id");
 }
 
@@ -91,6 +87,8 @@ function emailCheckBtnOnClickHandler(event){
     var data_val = {
         user_email: email_val
     };
+
+    check_email_btn.disabled = true;
 
     $.ajax({
         url:"/verify/email/send",
@@ -122,11 +120,11 @@ function verifyCodeCheckBtnOnClickHandler(event){
         data:data_val,
         type:"POST",
         success:function(data){
-            if(data === success){
+            if(data == success){
                 alert(`이메일 인증이 완료되었습니다.`);
                 email.setAttribute(attr_check, success);
                 verify.style.display="none";
-            }else if(data === fail){
+            }else if(data == 101){
                 alert(`인증코드가 일치하지 않습니다.`);
             }else{
                 alert("오류");
@@ -162,7 +160,7 @@ function joinBtnOnClickHandler(event){
            data: data_val,
            type:"POST",
            success:function(data){
-                if(data === success){
+                if(data == success){
                     alert("회원가입이 완료되었습니다");
                     window.location.href="/";
                 }else{

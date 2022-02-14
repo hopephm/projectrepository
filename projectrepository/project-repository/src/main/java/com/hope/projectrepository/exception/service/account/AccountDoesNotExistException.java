@@ -4,4 +4,7 @@ import com.hope.projectrepository.exception.ExceptionWrapper;
 
 public class AccountDoesNotExistException extends ExceptionWrapper {
     private final static String errorCode = "103";
+    public String getErrorCode(){
+        return errorCode;
+    }
 }

@@ -1,4 +1,4 @@
-package com.hope.projectrepository.exception;
+package com.hope.projectrepository.exception.handle;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

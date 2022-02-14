@@ -4,4 +4,7 @@ import com.hope.projectrepository.exception.ExceptionWrapper;
 
 public class VerificationTimeOutException extends ExceptionWrapper {
     private final static String errorCode = "100";
+    public String getErrorCode(){
+        return errorCode;
+    }
 }

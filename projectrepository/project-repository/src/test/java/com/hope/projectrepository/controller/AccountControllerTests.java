@@ -8,7 +8,7 @@ import com.hope.projectrepository.domain.service.account.manager.implementation.
 import com.hope.projectrepository.domain.service.account.verifier.implementation.VerifyInfo;
 import com.hope.projectrepository.domain.service.account.verifier.implementation.WaitingVerificationMap;
 import com.hope.projectrepository.exception.service.account.AccountDoesNotExistException;
-import com.hope.projectrepository.exception.service.account.LoginIdAlreadyExistException;
+import com.hope.projectrepository.exception.service.login.LoginIdAlreadyExistException;
 import com.hope.projectrepository.exception.service.account.NicknameAlreadyExistException;
 import com.hope.projectrepository.util.global.Result;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,7 +83,7 @@ public class AccountControllerTests {
 
         mvc.perform(MockMvcRequestBuilders.post("/create_account").params(params))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(LoginIdAlreadyExistException.getErrorCode()));
+                .andExpect(MockMvcResultMatchers.content().string(new LoginIdAlreadyExistException().getErrorCode()));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class AccountControllerTests {
 
         mvc.perform(MockMvcRequestBuilders.post("/create_account").params(params))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(NicknameAlreadyExistException.getErrorCode()));
+                .andExpect(MockMvcResultMatchers.content().string(new NicknameAlreadyExistException().getErrorCode()));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class AccountControllerTests {
         mvc.perform(MockMvcRequestBuilders.post("/delete_account")
                 .sessionAttr("user", user))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(AccountDoesNotExistException.getErrorCode()));
+                .andExpect(MockMvcResultMatchers.content().string(new AccountDoesNotExistException().getErrorCode()));
     }
 
     @Test

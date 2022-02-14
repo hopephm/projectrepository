@@ -12,9 +12,7 @@ public interface ProjectService {
     public List<ProjectOverview> search(String category, String orderby, String text);
     public ProjectOverview getProjectOverview(String projectId);
     public List<ProjectContentAndFileInfoDTO> getProjectContentAndFiles(ProjectOverview projectOverview);
-
     public ProjectOverview uploadProject(ProjectDTO projectDTO, MultipartFile[] files);
-
     public void sendFileToClient(HttpServletResponse response, String fileId);
 
 }

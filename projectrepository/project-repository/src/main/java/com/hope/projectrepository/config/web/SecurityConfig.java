@@ -3,7 +3,8 @@ package com.hope.projectrepository.config.web;
 import static com.hope.projectrepository.domain.entity.enums.RoleType.NORMAL_USER;
 import static com.hope.projectrepository.domain.entity.enums.RoleType.ADMIN;
 
-import com.hope.projectrepository.filter.LoginFilter;
+import com.hope.projectrepository.domain.service.login.LoginService;
+import com.hope.projectrepository.exception.service.login.RedirectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,21 +36,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public String[] publicPath;
 
     @Autowired
-    LoginFilter loginService;
+    LoginService loginService;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SpringSecurityDialect springSecurityDialect(){ return new SpringSecurityDialect(); }
+    public SpringSecurityDialect getSpringSecurityDialect(){ return new SpringSecurityDialect(); }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(loginService.getUserDetailService()).passwordEncoder(getPasswordEncoder());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
                 .antMatchers(publicPath).permitAll()
-//                .antMatchers(privatePath).hasAnyAuthority(NORMAL_USER.getRoleType(), ADMIN.getRoleType())
                 .anyRequest().hasAnyAuthority(NORMAL_USER.getRoleType(), ADMIN.getRoleType())
             .and()
                 .oauth2Login()
@@ -71,12 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .exceptionHandling().accessDeniedPage("/exception/denied")
         ;
-
-    }
-
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(loginService).passwordEncoder(passwordEncoder());
     }
 
     class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -88,25 +87,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
         @Override
-        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
-                throws ServletException, IOException {
+        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) {
+            registerUser();
+            setRedirection(request, response, auth);
+        }
+
+        private void registerUser(){
             if(loginType.equals(FORM))
                 loginService.registerNormalUser();
             else if(loginType.equals(OAUTH2))
                 loginService.registerSocialUser();
+        }
 
+        private void setRedirection(HttpServletRequest request, HttpServletResponse response, Authentication auth){
             HttpSession session = request.getSession();
+            String redirectUrl = null;
+            if(session != null)
+                redirectUrl = (String) session.getAttribute("prevPage");
 
-            if (session != null) {
-                String redirectUrl = (String) session.getAttribute("prevPage");
-                if (redirectUrl != null) {
+            try {
+                if (session != null && redirectUrl != null) {
                     session.removeAttribute("prevPage");
                     getRedirectStrategy().sendRedirect(request, response, redirectUrl);
                 } else {
                     super.onAuthenticationSuccess(request, response, auth);
                 }
-            } else {
-                super.onAuthenticationSuccess(request, response, auth);
+            }catch(Exception e){
+                throw new RedirectException();
             }
         }
     }

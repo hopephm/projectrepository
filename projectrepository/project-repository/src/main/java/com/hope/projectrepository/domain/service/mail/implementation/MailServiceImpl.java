@@ -57,8 +57,7 @@ public class MailServiceImpl implements MailService {
             mailSender.send(message);
         }catch(Exception e){
             // MailAuthenticationException, MailSendException, MailException
-            e.printStackTrace();
-//            throw new EmailSendException();
+            throw new EmailSendException();
         }
 
     }

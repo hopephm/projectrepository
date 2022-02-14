@@ -4,4 +4,7 @@ import com.hope.projectrepository.exception.ExceptionWrapper;
 
 public class FileTransferException extends ExceptionWrapper {
     private final static String errorCode = "201";
+    public String getErrorCode(){
+        return errorCode;
+    }
 }

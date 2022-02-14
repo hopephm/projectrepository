@@ -40,6 +40,4 @@ public class ProjectServiceImpl implements ProjectService {
     public void sendFileToClient(HttpServletResponse response, String fileId){
         fileManager.sendFileToClient(response, fileId);
     }
-
-
 }

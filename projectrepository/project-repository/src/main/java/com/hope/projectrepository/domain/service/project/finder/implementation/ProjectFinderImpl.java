@@ -10,13 +10,13 @@ import com.hope.projectrepository.domain.repository.ProjectOverviewRepository;
 import com.hope.projectrepository.domain.service.project.comparator.ProjectContentComparator;
 import com.hope.projectrepository.domain.service.project.comparator.ProjectOverviewComparator;
 import com.hope.projectrepository.domain.service.project.finder.ProjectFinder;
+import com.hope.projectrepository.exception.service.project.ProjectOverviewDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import javax.persistence.EntityNotFoundException;
+import java.util.*;
 
 public class ProjectFinderImpl implements ProjectFinder {
     @Autowired
@@ -50,7 +50,14 @@ public class ProjectFinderImpl implements ProjectFinder {
     String NONE;
 
     public ProjectOverview getProjectOverview(String projectId){
-        return projectOverviewRepository.getById(Long.parseLong(projectId));
+        Optional<ProjectOverview> optionalProjectOverview = projectOverviewRepository.findById(Long.parseLong(projectId));
+
+        if(optionalProjectOverview.equals(Optional.empty()))
+            throw new ProjectOverviewDoesNotExistException();
+
+        ProjectOverview projectOverview = optionalProjectOverview.get();
+
+        return projectOverview;
     }
 
     public List<ProjectContentAndFileInfoDTO> getProjectContentAndFiles(ProjectOverview projectOverview){

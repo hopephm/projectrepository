@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.UUID;
 
 public class FileManagerImpl implements FileManager {
@@ -31,6 +33,9 @@ public class FileManagerImpl implements FileManager {
     public void sendFileToClient(HttpServletResponse response, String fileId){
         FileInfo fileInfo = getFileInfo(fileId);
 
+        if(fileInfo == null)
+            throw new FileInfoDoesNotExistException();
+
         String originFileName = getOriginFileName(fileInfo);
         String sendFileName = getSendFileName(fileInfo);
         Long fileLength = getFileLength(originFileName);
@@ -41,9 +46,13 @@ public class FileManagerImpl implements FileManager {
     }
 
     private FileInfo getFileInfo(String fileId){
-        FileInfo fileInfo = fileInfoRepository.getById(Long.parseLong(fileId));
-        if(fileInfo == null)
+        Optional<FileInfo> optionalFileInfo = fileInfoRepository.findById(Long.parseLong(fileId));
+
+        if(optionalFileInfo.equals(Optional.empty()))
             throw new FileInfoDoesNotExistException();
+
+        FileInfo fileInfo = optionalFileInfo.get();
+
         return fileInfo;
     }
 

@@ -5,6 +5,7 @@ import com.hope.projectrepository.domain.entity.enums.RoleType;
 import com.hope.projectrepository.domain.repository.UserRepository;
 import com.hope.projectrepository.domain.service.account.manager.AccountManager;
 import com.hope.projectrepository.exception.service.account.*;
+import com.hope.projectrepository.exception.service.login.LoginIdAlreadyExistException;
 import com.hope.projectrepository.util.global.RandomCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

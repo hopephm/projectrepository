@@ -29,45 +29,53 @@ public class OAuth2Config {
     ){
         List<ClientRegistration> registrationList = new ArrayList<>();
 
-        { // Google Registration
-            OAuth2ClientProperties.Registration registration = oAuth2ClientProperties.getRegistration().get(CLIENT_GOOGLE);
-            registrationList.add(
-                    CommonOAuth2Provider.GOOGLE.getBuilder(CLIENT_GOOGLE)
-                            .clientId(registration.getClientId())
-                            .clientSecret(registration.getClientSecret())
-                            .scope("email", "profile")
-                            .build()
-            );
-        }
+        registerGoogle(oAuth2ClientProperties, registrationList);
+        registerFacebook(oAuth2ClientProperties, registrationList);
 
-        {   // Facebook Registration
-            OAuth2ClientProperties.Registration registration = oAuth2ClientProperties.getRegistration().get(CLIENT_FACEBOOK);
-            registrationList.add(
-                    CommonOAuth2Provider.FACEBOOK.getBuilder(CLIENT_FACEBOOK)
-                            .clientId(registration.getClientId())
-                            .clientSecret(registration.getClientSecret())
-                            .userInfoUri("https://graph.facebook.com/me?fields=id,name,email,link")
-                            .scope("email")
-                            .build()
-            );
-        }
+        registerNaver(registrationList, naverClientId, naverClientSecret);
+        registerKakao(registrationList, kakaoClientId, kakaoClientSecret);
 
-        // Naver Registration
+        return new InMemoryClientRegistrationRepository(registrationList);
+    }
+
+    private void registerGoogle(OAuth2ClientProperties oAuth2ClientProperties, List<ClientRegistration> registrationList){
+        OAuth2ClientProperties.Registration registration = oAuth2ClientProperties.getRegistration().get(CLIENT_GOOGLE);
+        registrationList.add(
+                CommonOAuth2Provider.GOOGLE.getBuilder(CLIENT_GOOGLE)
+                        .clientId(registration.getClientId())
+                        .clientSecret(registration.getClientSecret())
+                        .scope("email", "profile")
+                        .build()
+        );
+    }
+
+    private void registerFacebook(OAuth2ClientProperties oAuth2ClientProperties, List<ClientRegistration> registrationList){
+        OAuth2ClientProperties.Registration registration = oAuth2ClientProperties.getRegistration().get(CLIENT_FACEBOOK);
+        registrationList.add(
+                CommonOAuth2Provider.FACEBOOK.getBuilder(CLIENT_FACEBOOK)
+                        .clientId(registration.getClientId())
+                        .clientSecret(registration.getClientSecret())
+                        .userInfoUri("https://graph.facebook.com/me?fields=id,name,email,link")
+                        .scope("email")
+                        .build()
+        );
+    }
+
+    private void registerNaver(List<ClientRegistration> registrationList, String naverClientId, String naverClientSecret){
         registrationList.add(
                 CustomOAuth2Provider.NAVER.getBuilder(CLIENT_NAVER)
-                .clientId(naverClientId)
-                .clientSecret(naverClientSecret)
-                .build()
+                        .clientId(naverClientId)
+                        .clientSecret(naverClientSecret)
+                        .build()
         );
+    }
 
-        // Kakao Registration
+    private void registerKakao(List<ClientRegistration> registrationList, String kakaoClientId, String kakaoClientSecret){
         registrationList.add(
                 CustomOAuth2Provider.KAKAO.getBuilder(CLIENT_KAKAO)
                         .clientId(kakaoClientId)
                         .clientSecret(kakaoClientSecret)
                         .build()
         );
-
-        return new InMemoryClientRegistrationRepository(registrationList);
     }
 }

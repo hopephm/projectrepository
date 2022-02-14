@@ -75,14 +75,14 @@
       <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\main\resources\templates.exception" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.hope.projectrepository.util.response.data" />
-      <recent name="com.hope.projectrepository.util.response.json" />
-      <recent name="com.hope.projectrepository.util.global" />
-      <recent name="com.hope.projectrepository.domain.service.project.file" />
-      <recent name="com.hope.projectrepository.domain.service.project.finder" />
+      <recent name="com.hope.projectrepository.exception.handle" />
+      <recent name="com.hope.projectrepository.exception.global" />
+      <recent name="com.hope.projectrepository.domain.service.login" />
+      <recent name="com.hope.projectrepository.domain.service.login.implementation" />
+      <recent name="com.hope.projectrepository.exception.service.login" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.JsonTests.Test2">
+  <component name="RunManager" selected="Application.ProjectRepositoryApplication">
     <configuration name="ProjectRepositoryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.hope.projectrepository.ProjectRepositoryApplication" />
       <module name="project-repository.main" />

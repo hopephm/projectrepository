@@ -4,4 +4,7 @@ import com.hope.projectrepository.exception.ExceptionWrapper;
 
 public class ResetTimeOutException extends ExceptionWrapper {
     private final static String errorCode = "105";
+    public String getErrorCode(){
+        return errorCode;
+    }
 }

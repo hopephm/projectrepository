@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-
-// 예외를 전부 던지고 Controller에서 예외에 맞게 응답을 보내자!
 public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountManager accountManager;

@@ -4,24 +4,32 @@ const findPw = document.querySelector(".find_pw"),
 	emailInput = findPw.querySelector("input[name=user_email]");
 
 function sendResetMailBtnOnClickHandler(event){
-	var id = idInput.value;
-	var email = emailInput.value;
+	var id_val = idInput.value;
+	var email_val = emailInput.value;
 	var data = {
-		user_id: id,
-		user_email: email
+		user_id: id_val,
+		user_email: email_val
 	};
 
 	sendResetMailBtn.disabled = true;
 
 	$.ajax({
-		url: "/find/pw",
+		url: "/rest/account/users/passwords/find",
 		data: data,
 		type: "POST",
-		success:function(data){
-			alert("비밀번호 재설정 메일을 전송하였습니다.");
+		success:function(res){
+            const json = JSON.parse(res);
+            const res_code = json["code"];
+
+            if(res_code==SUCCESS){
+                alert("비밀번호 재설정 메일을 전송하였습니다.");
+            }
+			else{
+			    alert("비밀번호 재설정 메일을 전송에 실패하였습니다.");
+			}
+
 		}
 	});
-
 }
 
 

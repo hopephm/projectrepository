@@ -1,13 +1,11 @@
-package com.hope.projectrepository.controller.mvc;
+package com.hope.projectrepository.controller.view;
 
-import com.hope.projectrepository.domain.service.account.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class AccountModelController {
+public class AccountController {
     @GetMapping("/create_account")
     public String joinPage(){
         return "account/create_account";
@@ -18,9 +16,6 @@ public class AccountModelController {
         return "account/find_id";
     }
 
-    @GetMapping("/find/id/result")
-    public String findIdResult(){ return "account/find_id_result"; }
-
     @GetMapping("/delete_account")
     public String deleteAccountPage(){ return "account/delete_account"; }
 
@@ -29,10 +24,9 @@ public class AccountModelController {
         return "account/find_pw";
     }
 
-    @GetMapping("/find/pw/{loginId}/{resetKey}")
-    public String findPwResult(){
+    @GetMapping("/find/pw/reset")
+    public String findPwResult(@RequestParam("user_id") String loginId,
+                               @RequestParam("key") String resetKey) {
         return "account/find_pw_result";
     }
-
-
 }

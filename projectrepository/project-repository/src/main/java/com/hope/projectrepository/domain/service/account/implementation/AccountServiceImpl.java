@@ -7,6 +7,7 @@ import com.hope.projectrepository.domain.service.account.manager.AccountManager;
 import com.hope.projectrepository.domain.service.account.verifier.AccountVerifier;
 import com.hope.projectrepository.exception.service.account.AccountDoesNotExistException;
 import com.hope.projectrepository.util.global.ContextManager;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -81,15 +82,22 @@ public class AccountServiceImpl implements AccountService {
         return newPw;
     }
 
-    public User checkUserByLoginId(String loginId){
+    public Boolean isExistLoginId(String loginId){
         User user = accountManager.getUserByLoginId(loginId);
         if(user == null)
-            throw new AccountDoesNotExistException();
-        return user;
+            return false;
+        return true;
     }
 
-    public User checkUserByNickname(String nickname){
+    public Boolean isExistNickname(String nickname){
         User user = accountManager.getUserByNickname(nickname);
+        if(user == null)
+            return false;
+        return true;
+    }
+
+    public User getUserById(Long userId){
+        User user = accountManager.getUserById(userId);
         if(user == null)
             throw new AccountDoesNotExistException();
         return user;

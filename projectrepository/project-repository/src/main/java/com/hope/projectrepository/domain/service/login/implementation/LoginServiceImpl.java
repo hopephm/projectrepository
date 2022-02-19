@@ -97,7 +97,7 @@ public class LoginServiceImpl implements LoginService{
         Map<String, Object> userInfo = authToken.getPrincipal().getAttributes();
         String roleName = authToken.getAuthorizedClientRegistrationId();
 
-        User user = getAccountIfItExists(userInfo);
+        User user = getAccountIfItExists(userInfo, roleName);
         if(user == null){
             user = convertUser(roleName, userInfo);
             userRepository.save(user);
@@ -113,20 +113,38 @@ public class LoginServiceImpl implements LoginService{
         return (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
     }
 
-    private User getAccountIfItExists(Map<String, Object> userInfo){
-        User user = userRepository.findByLoginId(String.valueOf(userInfo.get("email")));
+    private User getAccountIfItExists(Map<String, Object> userInfo, String roleName){
+        String email = getEmail(userInfo, roleName);
+        String registeredId = constructSocialUserLoginId(email, roleName);
+        User user = userRepository.findByLoginId(registeredId);
+
         return user;
+    }
+
+    private String getEmail(Map<String, Object> userInfo, String roleName){
+        if(isCommonRoleType(roleName)){
+            return String.valueOf(userInfo.get("email"));
+        }else if(isNaverRoleType(roleName)){
+            return ((Map<String, String>) userInfo.get("response")).get("email");
+        }else if(isKakaoRoleType(roleName)){
+            return String.valueOf(((Map<String, Object>) userInfo.get("kakao_account")).get("email"));
+        }
+        return "none";
+    }
+
+    private String constructSocialUserLoginId(String Id, String roleName){
+        return "{" + roleName + "}" + Id;
     }
 
     private User convertUser(String roleName, Map<String, Object> userInfo) {
         User user = null;
 
         if(isCommonRoleType(roleName)){
-            user = constructCommonUser(userInfo);
+            user = constructCommonUser(userInfo, roleName);
         }else if(isNaverRoleType(roleName)){
-            user = constructNaverUser(userInfo);
+            user = constructNaverUser(userInfo, roleName);
         }else if(isKakaoRoleType(roleName)){
-            user = constructKakaoUser(userInfo);
+            user = constructKakaoUser(userInfo, roleName);
         }
 
         if(user == null)
@@ -151,8 +169,8 @@ public class LoginServiceImpl implements LoginService{
         return false;
     }
 
-    private User constructCommonUser(Map<String, Object> userInfo){
-        String loginId = String.valueOf(userInfo.get("email"));
+    private User constructCommonUser(Map<String, Object> userInfo, String roleName){
+        String loginId = constructSocialUserLoginId(String.valueOf(userInfo.get("email")), roleName);
         String email = String.valueOf(userInfo.get("email"));
         String nickname = String.valueOf(userInfo.get("name"));
         return buildUser(loginId, email, nickname);
@@ -164,10 +182,10 @@ public class LoginServiceImpl implements LoginService{
         return false;
     }
 
-    private User constructNaverUser(Map<String, Object> userInfo){
+    private User constructNaverUser(Map<String, Object> userInfo, String roleName){
         Map<String, String> naverUserInfo = (Map<String, String>) userInfo.get("response");
 
-        String loginId = String.valueOf(naverUserInfo.get("email"));
+        String loginId = constructSocialUserLoginId(String.valueOf(naverUserInfo.get("email")), roleName);
         String email = String.valueOf(naverUserInfo.get("email"));
         String nickname = String.valueOf(naverUserInfo.get("nickname"));
         return buildUser(loginId, email, nickname);
@@ -179,11 +197,11 @@ public class LoginServiceImpl implements LoginService{
         return false;
     }
 
-    private User constructKakaoUser(Map<String ,Object> userInfo){
+    private User constructKakaoUser(Map<String ,Object> userInfo, String roleName){
         Map<String, Object> info = (Map<String, Object>) userInfo.get("kakao_account");
         Map<String, String> profile = (Map<String, String>) info.get("profile");
 
-        String loginId = String.valueOf(info.get("email"));
+        String loginId = constructSocialUserLoginId(String.valueOf(info.get("email")), roleName);
         String email = String.valueOf(info.get("email"));
         String nickname = String.valueOf(profile.get("nickname"));
 

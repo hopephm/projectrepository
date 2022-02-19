@@ -12,7 +12,7 @@ public class ProjectDTO {
     private String subject;
     private String techstack;
     private String scale;
-    private String startDate;
-    private String endDate;
+    private String projectStartDate;
+    private String projectEndDate;
     private ProjectContentDTO[] contentDTOS;
 }

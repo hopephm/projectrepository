@@ -137,7 +137,7 @@ public class AccountManagerImpl implements AccountManager {
     }
 
     public String getResetUrl(String loginId, String resetKey){
-        return basicUrl + "/" + loginId + "/" + resetKey;
+        return basicUrl + "?user_id=" + loginId + "&key=" + resetKey;
     }
 
     public String resetPw(String resetKey){
@@ -169,4 +169,6 @@ public class AccountManagerImpl implements AccountManager {
     public User getUserByNickname(String nickname){
         return userRepository.findByNickname(nickname);
     }
+
+    public User getUserById(Long userId){ return userRepository.findByUserId(userId);}
 }

@@ -17,6 +17,7 @@ public interface AccountService {
     public List<String> findLoginIdsByEmail(String email);
     public void changeAccountStateAndSendResetEmail(String email, String loginId);
     public String resetPw(String resetKey);
-    public User checkUserByLoginId(String loginId);
-    public User checkUserByNickname(String nickname);
+    public User getUserById(Long userId);
+    public Boolean isExistLoginId(String loginId);
+    public Boolean isExistNickname(String nickname);
 }

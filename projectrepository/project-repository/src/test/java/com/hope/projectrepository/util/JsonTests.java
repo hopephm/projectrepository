@@ -3,6 +3,7 @@ package com.hope.projectrepository.util;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.domain.repository.ProjectOverviewRepository;
+import com.hope.projectrepository.domain.repository.UserRepository;
 import com.hope.projectrepository.domain.service.account.AccountService;
 import com.hope.projectrepository.exception.ExceptionWrapper;
 import com.hope.projectrepository.exception.service.account.AccountDoesNotExistException;
@@ -46,5 +47,28 @@ public class JsonTests {
             po = null;
         }
         System.out.println(po);
+    }
+
+    @Test
+    public void booleanTest2(){
+        Boolean bool = true;
+        System.out.println(bool.toString());
+    }
+
+    @Test
+    public void booleanTest(){
+        Boolean result = accountService.isExistNickname("감자골청년");
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("result", result);
+    }
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Test
+    public void userTesT(){
+        User user = userRepository.findByLoginId("1234");
+        userRepository.delete(user);
     }
 }

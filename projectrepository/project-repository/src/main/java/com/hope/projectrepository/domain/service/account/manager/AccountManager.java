@@ -13,4 +13,5 @@ public interface AccountManager {
     public String changeAccountStateToResetPw(User user);
     public User getUserByLoginId(String loginId);
     public User getUserByNickname(String nickname);
+    public User getUserById(Long userId);
 }

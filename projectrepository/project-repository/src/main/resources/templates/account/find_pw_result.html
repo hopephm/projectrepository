@@ -2,20 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <title>Project Repository: Find Pw Result</title>
 </head>
 <body>
 <div th:replace="layout/header::header"></div>
-    <h3>변경된 계정정보</h3>
-    <table>
-        <tr>
-            <th class="disc">id</th>
-            <td th:text="${id}"></td>
-        </tr>
-        <tr>
-            <th class="disc">password</th>
-            <td th:text="${pw}"></td>
-        </tr>
-    </table>
+
+    <div class="reset_pw">
+        <h3>비밀번호 초기화</h3>
+        <button class="reset_btn">초기화</button>
+    </div>
+
+    <div class="reset_pw_result" style="display:none;">
+        <h3>변경된 계정정보</h3>
+        <table class="account_info">
+            <tr>
+                <th class="disc">id</th>
+                <td class="id"></td>
+            </tr>
+            <tr>
+                <th class="disc">password</th>
+                <td class="pw"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script th:src="@{/js/util/csrf.js}"></script>
+    <script th:src="@{/js/util/global.js}"></script>
+    <script th:src="@{/js/account/find_pw_result.js}"></script>
 </body>
 </html>

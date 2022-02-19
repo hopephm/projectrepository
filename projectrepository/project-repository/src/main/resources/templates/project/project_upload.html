@@ -11,7 +11,7 @@
 
   <div class="project">
     <h3>프로젝트 업로드</h3>
-    <form enctype="multipart/form-data" id="file_form">
+    <div enctype="multipart/form-data" id="file_form">
       <table>
         <tr>
           <th class="disc">프로젝트 제목</th>
@@ -40,20 +40,20 @@
         <tr>
           <th class="disc">프로젝트 시작날짜</th>
           <td class="__square">
-            <input type="date" name="start_date">
+            <input type="date" name="start_date" max="9999-12-31">
           </td>
         </tr>
         <tr>
           <th class="disc">프로젝트 종료날짜</th>
           <td class="__square">
-            <input type="date" name="end_date">
+            <input type="date" name="end_date" max="9999-12-31">
           </td>
         </tr>
       </table>
 
       <ul class="content_list">
         <li class="last_content horizontal" order="0">
-          <button class="subtitle" type="button">새 항목</button>
+          <button class="sub_title" type="button">새 항목</button>
         </li>
       </ul>
       <button class="add_content" type="button">+</button>
@@ -63,7 +63,7 @@
         <table class="content">
           <tr>
             <th class="disc">항목 이름</th>
-            <td class="subtitle_holder bg_ea">
+            <td class="sub_title_holder bg_ea">
               <input type="text" name="contentTitle">
             </td>
           </tr>
@@ -85,13 +85,14 @@
 
       </div>
 
-    </form>
+    </div>
 
     <button class="upload">upload</button>
   </div>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script th:src="@{/js/util/csrf.js}"></script>
+  <script th:src="@{/js/util/global.js}"></script>
   <script th:src="@{/js/project/project_upload.js}"></script>
 </body>
 </html>

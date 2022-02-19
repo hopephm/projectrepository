@@ -44,14 +44,16 @@ public class AccountVerifierImpl implements AccountVerifier {
 
     public void verifyCode(String key, String code){
         VerifyInfo info = waitingVerificationMap.get(key);
-        waitingVerificationMap.remove(key);
 
         if(isNotExist(info))
             throw new EmailVerificationDoesNotExistException();      // 이메일 정보 예외
         if(isTimeout(info.getLimit()))
             throw new ResetTimeOutException();      // 시간초과 예외
+
         if(!isCorrectCode(info.getCode(),code))
             throw new VerificationCodeDoesNotMatchException();      // 코드 불일치 예외
+        else
+            waitingVerificationMap.remove(key);
     }  
 
     public boolean isNotExist(VerifyInfo info){

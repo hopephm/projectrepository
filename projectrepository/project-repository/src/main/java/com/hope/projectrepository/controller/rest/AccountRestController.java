@@ -19,33 +19,10 @@ public class AccountRestController {
     @Autowired
     AccountService accountService;
 
-    // @GetMapping("/find/id/result")
-    @GetMapping("/users/ids")
+    @GetMapping("/users/{userId}")
     @ExceptionHandling
-    public String findLoginIdByEmail(@RequestParam("user_email") String email){
-        List<String> idList = accountService.findLoginIdsByEmail(email);
-
-        JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("idList", idList);
-
-        return jr.getResponse();
-    }
-
-    @GetMapping("/users/nicknames")
-    @ExceptionHandling
-    public String isDuplicatedNickname(@RequestParam("nickname") String nickname) {
-        User user = accountService.checkUserByNickname(nickname);
-
-        JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("user", user);
-
-        return jr.getResponse();
-    }
-
-    @GetMapping("/users")
-    @ExceptionHandling
-    public String isDuplicatedLoginId(@RequestParam("user_id") String loginId){
-        User user = accountService.checkUserByLoginId(loginId);
+    public String findUserByUserId(@PathVariable Long userId){
+        User user = accountService.getUserById(userId);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
         jr.addData("user", user);
@@ -80,6 +57,29 @@ public class AccountRestController {
         return jr.getResponse();
     }
 
+    @GetMapping("/nicknames/exists/{nickname}")
+    @ExceptionHandling
+    public String isDuplicateNickname(@PathVariable String nickname){
+        Boolean result = accountService.isExistNickname(nickname);
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("result", result);
+
+        return jr.getResponse();
+
+    }
+
+    @GetMapping("/ids/exists/{loginId}")
+    @ExceptionHandling
+    public String isDuplicateLoginId(@PathVariable String loginId){
+        Boolean result = accountService.isExistLoginId(loginId);
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("result", result);
+
+        return jr.getResponse();
+    }
+
     @PostMapping("/emails/send")
     @ExceptionHandling
     public String sendEmailVerificationCode(Model model,
@@ -103,7 +103,18 @@ public class AccountRestController {
         return jr.getResponse();
     }
 
-    @PostMapping("/passwords/find")
+    @GetMapping("/users/ids")
+    @ExceptionHandling
+    public String findLoginIdByEmail(@RequestParam("user_email") String email){
+        List<String> idList = accountService.findLoginIdsByEmail(email);
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("id_list", idList);
+
+        return jr.getResponse();
+    }
+
+    @PostMapping("/users/passwords/find")
     @ExceptionHandling
     public String sendResetPasswordEmail(Model model,
                                              @RequestParam("user_id") String loginId,
@@ -115,8 +126,7 @@ public class AccountRestController {
         return jr.getResponse();
     }
 
-    // @GetMapping("/find/pw/{loginId}/{resetKey}") 의 동작
-    @PostMapping("/passwords/reset")
+    @PostMapping("/users/passwords/reset")
     @ExceptionHandling
     public String resetPassword(@RequestParam("user_id") String loginId,
                                 @RequestParam("reset_key") String resetKey){
@@ -124,8 +134,8 @@ public class AccountRestController {
         String newPw = accountService.resetPw(resetKey);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("loginId", loginId);
-        jr.addData("newPw", newPw);
+        jr.addData("id", loginId);
+        jr.addData("password", newPw);
 
         return jr.getResponse();
     }

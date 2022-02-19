@@ -15,7 +15,7 @@ table {
     float: left;
 }
 
-.subtitle{
+.sub_title{
     margin: 0 0 0 0;
     font-size: 3px;
 }
@@ -35,6 +35,13 @@ table {
 .square{
     float: left;
     background-color: #EAEAEA;
+    text-align: center;
+    width: 150px;
+}
+
+._disc{
+    font-weight: bold;
+    background-color: #DDDDDD;
     text-align: center;
     width: 150px;
 }
@@ -67,7 +74,9 @@ table {
 }
 
 .content_square{
+    font-weight: normal;
     background-color: #EAEAEA;
+    text-align: left;
     width: 450px;
 }
 

@@ -11,7 +11,7 @@ const project = document.querySelector(".project"),
     content_last_li = project.querySelector(".last_content"),
     content_last_btn = content_last_li.querySelector("button"),
 
-    subtitle_holder = project.querySelector(".subtitle_holder"),
+    subtitle_holder = project.querySelector(".sub_title_holder"),
     file_holder = project.querySelector(".file_holder"),
     content_holder = project.querySelector(".content_holder"),
 
@@ -22,30 +22,50 @@ const project = document.querySelector(".project"),
     upload_btn = project.querySelector(".upload"),
     add_btn = project.querySelector(".add_content");
 
-var fail = "fail";
-var success = "success";
 var content_info = [{title:content_title, file:content_file, content:content_content}];
 var current_content = 0;
 
-function uploadBtnOnClickHandler(event){
-    const title_val = title_input.value;
-    const subject_val = subject_input.value;
-    const techstack_val = techstack_input.value;
-    const scale_val = scale_input.value;
-    const start_date_val = start_date_input.value;
-    const end_date_val = end_date_input.value;
+function getToday(){
+    var date = new Date();
 
-    var data = {
-        title:title_val,
-        subject: subject_val,
-        techstack: techstack_val,
-        scale: scale_val,
-        startDate: start_date_val,
-        endDate: end_date_val
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
+}
+
+function checkInput(data){
+    var today = getToday();
+
+    if(data["title"] == "") alert("제목을 입력해주세요.");
+    else if(data["subject"] == "") alert("주제를 입력해주세요.");
+    else if(data["techstack"] == "") alert("기술스택을 입력해주세요.");
+    else if(data["scale"] == "") alert("규모를 입력해주세요.");
+    else if(data["projectStartDate"] == "") alert("프로젝트 시작날짜를 입력해주세요.");
+    else if(today < data["projectStartDate"]) alert("프로젝트 시작날짜를 확인해주세요.");
+    else if(data["projectEndDate"] == "") alert("프로젝트 종료날짜를 입력해주세요.");
+    else if(today < data["projectEndDate"]) alert("프로젝트 종료날짜를 확인해주세요.");
+    else if(data["projectStartDate"] > data["projectEndDate"])
+        alert("프로젝트 종료날짜는 시작날짜보다 빠를 수 없습니다.");
+    else{
+        return true;
+    }
+    return false;
+}
+
+function getOverviewInfo(){
+    return {
+        title:title_input.value,
+        subject: subject_input.value,
+        techstack: techstack_input.value,
+        scale: scale_input.value,
+        projectStartDate: start_date_input.value,
+        projectEndDate: end_date_input.value
     };
+}
 
-    var formData = new FormData();
-
+function getContentInfo(formData){
     var contentDTOS = [];
 
     for(let i = 0; i < content_info.length; i++){
@@ -53,7 +73,7 @@ function uploadBtnOnClickHandler(event){
         contentDTO["contentTitle"] = content_info[i]["title"].value;
         contentDTO["content"] = content_info[i]["content"].value;
         contentDTO["no"] = i;
-        
+
         if(content_info[i]["file"].value){
             var file_element = content_info[i]["file"].files[0];
             formData.append("file", file_element);
@@ -61,35 +81,44 @@ function uploadBtnOnClickHandler(event){
             contentDTO["fileName"] = "null";
             formData.append("file", new File([" "], "__dummy", {type: "text/plain",}));
         }
-        
+
         contentDTOS.push(contentDTO);
     }
-    
-    data["contentDTOS"] = contentDTOS;
 
-    formData.append('projectDTO', new Blob([JSON.stringify(data)] , {type: "application/json"}));
+    return contentDTOS;
+}
 
-     if(title_val == "") alert("제목을 입력해주세요.");
-     else if(subject_val == "") alert("주제를 입력해주세요.");
-     else if(techstack_val == "") alert("기술스택을 입력해주세요.");
-     else if(scale_val == "") alert("규모를 입력해주세요.");
-     else if(start_date_val == "") alert("프로젝트 시작날짜를 입력해주세요.");
-     else if(end_date_val == "") alert("프로젝트 종료날짜를 입력해주세요.");
-     else{
-        var url="/upload";
+function constructFormData(){
+    var formData = new FormData();
+    var info = getOverviewInfo();
+    info["contentDTOS"] = getContentInfo(formData);
+    formData.append('projectDTO', new Blob([JSON.stringify(info)] , {type: "application/json"}));
+    return formData;
+}
 
+function uploadBtnOnClickHandler(event){
+    var data = constructFormData();
+    if(checkInput(data)){
         $.ajax({
-            url:url,
-            data: formData,
+            url:"/rest/project/projects",
+            data: data,
             processData: false,
             contentType: false,
             type:"POST",
-            success:function(data){
-                alert(`프로젝트가 업로드 되었습니다.`);
-                window.location.href = `/project/${data}`;
+            success:function(res){
+                const json = JSON.parse(res);
+                const res_code = json["code"];
+                if(res_code == SUCCESS){
+                    alert("프로젝트가 업로드 되었습니다.");
+                    const project_id = json["data"]["project_overview"]["project_id"];
+                    window.location.href = "/project?project_id=" + project_id;
+                }else{
+                    alert(`프로젝트가 업로드 실패`);
+                }
+
             }
         });
-     }
+    }
 }
 
 function changeTo(od){
@@ -117,32 +146,39 @@ function summarize(str){
     return str;
 }
 
-function createNewContent(){
-    // 원래 항목을 저장, 해당 버튼 생성
-    var content_li = document.createElement("li");
-    var content_btn = document.createElement("button");
-
+function setButtonText(btn){
     var cur_title = content_info[current_content]["title"];
 
-    if(cur_title.value == "")
-        content_btn.innerText = `항목 ${content_info.length}`;
-    else{
-       content_btn.innerText = summarize(cur_title.value);
+    if(cur_title.value == ""){
+        cur_title.value = "항목" +content_info.length;
+        btn.innerText = cur_title.value;
     }
+    else
+       btn.innerText = summarize(cur_title.value);
+}
 
-    // 새로 생성하는 항목의 순서 표시
-    content_last_li.setAttribute("order", parseInt(content_last_li.getAttribute("order")) +1);
+function constructButton(){
+    var btn = createElement("button", "sub_title");
+    btn.addEventListener("click", subtitleBtnOnClickHandler);
+    setButtonText(btn);
+    return btn;
+}
 
-    content_btn.setAttribute("type", "button");
-    content_btn.classList.add("subtitle");
-    content_btn.addEventListener("click", subtitleBtnOnClickHandler);
-
-    content_li.classList.add("horizontal");
+function constructNewContentLi(){
+    var content_li = createElement("li", "horizontal");
     content_li.setAttribute("order", content_info.length-1);
+
+    var content_btn = constructButton();
     content_li.appendChild(content_btn);
 
-    content_ul.insertBefore(content_li, content_last_li);
+    return content_li;
+}
 
+function setLastOrder(){
+    content_last_li.setAttribute("order", parseInt(content_last_li.getAttribute("order")) +1);
+}
+
+function setContentInfo(){
     var ntitle = document.createElement("input");
         ntitle.setAttribute("type", "text");
         ntitle.setAttribute("name", "contentTitle");
@@ -156,7 +192,15 @@ function createNewContent(){
         nfile.setAttribute("name", "file");
 
     content_info.push({title: ntitle, content: ncontent, file: nfile});
+}
 
+function createNewContent(){
+    var content_li = constructNewContentLi();
+
+    setLastOrder();
+    setContentInfo();
+
+    content_ul.insertBefore(content_li, content_last_li);
     content_last_btn.innerText = "새 항목";
 }
 
@@ -175,9 +219,7 @@ function subtitleInputOnChangeHandler(event){
 }
 
 function addBtnOnClickHandler(event){
-    // 현재 값이 저장되어야 함
     createNewContent();
-
     changeTo(content_info.length-1);
 }
 

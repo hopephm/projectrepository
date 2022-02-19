@@ -1,14 +1,15 @@
-package com.hope.projectrepository.controller.mvc;
+package com.hope.projectrepository.controller.view;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class LoginModelController {
+public class LoginController {
+//              "login processing"
+//    GET   /oauth2/authorization/{socialName}
+//    POST  /login?username={userName}&password={passWord}
+
     @GetMapping("/login")
     public String unitedLoginPage(){
         return "login/login";

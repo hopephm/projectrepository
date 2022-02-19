@@ -96,48 +96,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccountControllerTests.createAccountNicknameDuplicateFailureTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.controller.AccountControllerTests.createAccountNicknameDuplicateFailureTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="AccountControllerTests.deleteAccountAccountDoesNotExistExceptionFailureTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.controller.AccountControllerTests.deleteAccountAccountDoesNotExistExceptionFailureTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="JsonTests.Test2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -159,12 +117,54 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="JsonTests.jsonTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="JsonTests.booleanTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.util.JsonTests.jsonTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.util.JsonTests.booleanTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="JsonTests.booleanTest2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.util.JsonTests.booleanTest2&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="JsonTests.userTesT" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/projectrepository/project-repository" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.hope.projectrepository.util.JsonTests.userTesT&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -182,11 +182,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.JsonTests.Test2" />
-        <item itemvalue="Gradle.JsonTests.jsonTest" />
         <item itemvalue="Application.ProjectRepositoryApplication" />
-        <item itemvalue="Gradle.AccountControllerTests.deleteAccountAccountDoesNotExistExceptionFailureTest" />
-        <item itemvalue="Gradle.AccountControllerTests.createAccountNicknameDuplicateFailureTest" />
+        <item itemvalue="Gradle.JsonTests.userTesT" />
+        <item itemvalue="Gradle.JsonTests.booleanTest" />
+        <item itemvalue="Gradle.JsonTests.booleanTest2" />
+        <item itemvalue="Gradle.JsonTests.Test2" />
       </list>
     </recent_temporary>
   </component>

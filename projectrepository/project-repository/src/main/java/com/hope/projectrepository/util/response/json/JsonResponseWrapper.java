@@ -45,6 +45,11 @@ public class JsonResponseWrapper {
         obj.addProperty(key,value);
     }
 
+    public void addData(String key, Boolean bool){
+        JsonObject obj = getDataJsonObj();
+        obj.addProperty(key, bool.toString());
+    }
+
     public void addData(String key, ProjectOverview po){
         JsonObject dataObj = getDataJsonObj();
         JsonObject json = createProjectOverviewJsonObject(po);
@@ -84,28 +89,27 @@ public class JsonResponseWrapper {
     private JsonObject createProjectOverviewJsonObject(ProjectOverview po){
         JsonObject json = new JsonObject();
 
-        json.addProperty("projectId", nullAble(po.getProjectId()));
+        json.addProperty("project_id", nullAble(po.getProjectId()));
 
         User user = po.getUser();
         if(user != null)
-            json.addProperty("user", nullAble(po.getUser().getLoginId()));
-        else
-            json.addProperty("user", NULL);
+            json.add("user", createUserJsonObject(user));
 
-        json.addProperty("mainTitle", nullAble(po.getMainTitle()));
+        json.addProperty("main_title", nullAble(po.getMainTitle()));
         json.addProperty("subject", nullAble(po.getSubject()));
-        json.addProperty("scale", nullAble(po.getTechStack()));
-        json.addProperty("projectStartDate", nullAble(po.getProjectStartDate()));
-        json.addProperty("projectEndDate", nullAble(po.getProjectEndDate()));
-        json.addProperty("createDate",nullAble(po.getCreateDate()));
-        json.addProperty("updateDate",nullAble(po.getUpdateDate()));
+        json.addProperty("scale", nullAble(po.getScale()));
+        json.addProperty("techstack", nullAble(po.getTechStack()));
+        json.addProperty("project_start_date", nullAble(po.getProjectStartDate()));
+        json.addProperty("project_end_date", nullAble(po.getProjectEndDate()));
+        json.addProperty("create_date",nullAble(po.getCreateDate()));
+        json.addProperty("update_date",nullAble(po.getUpdateDate()));
         return json;
     }
 
     private JsonObject createUserJsonObject(User user){
         JsonObject json = new JsonObject();
-        json.addProperty("Id", nullAble(user.getUserId()));
-        json.addProperty("loginId", nullAble(user.getLoginId()));
+        json.addProperty("user_id", nullAble(user.getUserId()));
+        json.addProperty("login_id", nullAble(user.getLoginId()));
         json.addProperty("nickname", nullAble(user.getNickname()));
         json.addProperty("email", nullAble(user.getEmail()));
 
@@ -117,16 +121,16 @@ public class JsonResponseWrapper {
         ProjectContent projectContent = projectContentAndFileInfoDTO.getContent();
         FileInfo fileInfo = projectContentAndFileInfoDTO.getFile();
 
-        json.addProperty("contentId", nullAble(projectContent.getContentId()));
-        json.addProperty("subTitle", nullAble(projectContent.getSubTitle()));
+        json.addProperty("content_id", nullAble(projectContent.getContentId()));
+        json.addProperty("sub_title", nullAble(projectContent.getSubTitle()));
         json.addProperty("content", nullAble(projectContent.getContent()));
 
         if(fileInfo != null){
-            json.addProperty("fileId", nullAble(fileInfo.getFileId()));
-            json.addProperty("fileName", nullAble(fileInfo.getFileName()));
+            json.addProperty("file_id", nullAble(fileInfo.getFileId()));
+            json.addProperty("file_name", nullAble(fileInfo.getFileName()));
         }else{
-            json.addProperty("fileId", NULL);
-            json.addProperty("fileName", NULL);
+            json.addProperty("file_id", NULL);
+            json.addProperty("file_name", NULL);
         }
 
         return json;

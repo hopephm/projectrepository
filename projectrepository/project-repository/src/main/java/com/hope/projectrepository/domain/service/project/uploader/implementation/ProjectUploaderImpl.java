@@ -42,8 +42,8 @@ public class ProjectUploaderImpl implements ProjectUploader {
         String subject = projectDTO.getSubject();
         String scale = projectDTO.getScale();
         String techstack = projectDTO.getTechstack();
-        String startDate =projectDTO.getStartDate();
-        String endDate = projectDTO.getEndDate();
+        String startDate =projectDTO.getProjectStartDate();
+        String endDate = projectDTO.getProjectEndDate();
 
         ProjectOverview newOverview = ProjectOverview.builder()
                 .user(user)
@@ -91,7 +91,7 @@ public class ProjectUploaderImpl implements ProjectUploader {
     }
 
     private String parseNewLine(String str){
-        return str.replace("\n","</br>");
+        return str.replace("\n","<br/>");
     }
 
     private boolean isFileExist(MultipartFile file){

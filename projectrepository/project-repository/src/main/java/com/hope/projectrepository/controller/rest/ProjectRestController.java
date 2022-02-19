@@ -21,21 +21,19 @@ public class ProjectRestController {
     @Autowired
     ProjectService projectService;
 
-    // @GetMapping("/search")
     @GetMapping("/projects")
     @ExceptionHandling
     public String getProjects( @RequestParam("category") @Nullable String category,
-                                             @RequestParam("orderby") @Nullable String orderby,
-                                             @RequestParam("search_text") @Nullable String text) {
+                               @RequestParam("orderby") @Nullable String orderby,
+                               @RequestParam("search_text") @Nullable String text) {
         List<ProjectOverview> projectList = projectService.search(category, orderby, text);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("projectList", projectList);
+        jr.addData("project_list", projectList);
 
         return jr.getResponse();
     }
 
-    // @GetMapping("/project/{projectId}")
     @GetMapping("/projects/{projectId}")
     @ExceptionHandling
     public String getProject (@PathVariable String projectId) {
@@ -44,8 +42,8 @@ public class ProjectRestController {
         List<ProjectContentAndFileInfoDTO> contentAndFiles = projectService.getProjectContentAndFiles(projectOverview);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("projectOverview", projectOverview);
-        jr.addData("projectContentList", contentAndFiles);
+        jr.addData("project_overview", projectOverview);
+        jr.addData("project_content_list", contentAndFiles);
 
         return jr.getResponse();
     }
@@ -58,7 +56,7 @@ public class ProjectRestController {
         ProjectOverview newOverview = projectService.uploadProject(projectDTO, files);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("projectOverview", newOverview);
+        jr.addData("project_overview", newOverview);
 
         return jr.getResponse();
     }

@@ -14,5 +14,4 @@ public class HomeController {
     public String requestDeniedPage(Model model){
         return "denied";
     }
-
 }

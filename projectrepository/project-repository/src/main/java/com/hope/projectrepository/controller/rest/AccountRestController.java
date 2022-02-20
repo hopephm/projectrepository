@@ -1,6 +1,6 @@
 package com.hope.projectrepository.controller.rest;
 
-import com.hope.projectrepository.compatibility.dto.AccountDTO;
+import com.hope.projectrepository.util.dto.AccountDTO;
 import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.domain.service.account.AccountService;
 import com.hope.projectrepository.exception.handle.ExceptionHandling;

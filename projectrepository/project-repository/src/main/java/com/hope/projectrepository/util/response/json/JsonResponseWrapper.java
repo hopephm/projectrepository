@@ -2,17 +2,13 @@ package com.hope.projectrepository.util.response.json;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.hope.projectrepository.compatibility.dto.ProjectContentAndFileInfoDTO;
+import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
 import com.hope.projectrepository.domain.entity.FileInfo;
 import com.hope.projectrepository.domain.entity.ProjectContent;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.util.global.Result;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JsonResponseWrapper {

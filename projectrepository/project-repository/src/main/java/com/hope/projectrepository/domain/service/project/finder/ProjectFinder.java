@@ -1,6 +1,6 @@
 package com.hope.projectrepository.domain.service.project.finder;
 
-import com.hope.projectrepository.compatibility.dto.ProjectContentAndFileInfoDTO;
+import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 
 import java.util.List;

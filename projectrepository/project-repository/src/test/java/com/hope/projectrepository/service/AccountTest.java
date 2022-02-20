@@ -1,7 +1,7 @@
 package com.hope.projectrepository.service;
 
 import com.hope.projectrepository.domain.entity.User;
-import com.hope.projectrepository.compatibility.dto.AccountDTO;
+import com.hope.projectrepository.util.dto.AccountDTO;
 import com.hope.projectrepository.domain.repository.UserRepository;
 import com.hope.projectrepository.domain.service.account.AccountService;
 import com.hope.projectrepository.domain.service.account.manager.AccountManager;

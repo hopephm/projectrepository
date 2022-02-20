@@ -1,7 +1,7 @@
 package com.hope.projectrepository.controller.rest;
 
-import com.hope.projectrepository.compatibility.dto.ProjectContentAndFileInfoDTO;
-import com.hope.projectrepository.compatibility.dto.ProjectDTO;
+import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
+import com.hope.projectrepository.util.dto.ProjectDTO;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 import com.hope.projectrepository.domain.service.project.ProjectService;
 import com.hope.projectrepository.exception.handle.ExceptionHandling;

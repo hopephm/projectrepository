@@ -1,6 +1,6 @@
 package com.hope.projectrepository.domain.service.project.uploader;
 
-import com.hope.projectrepository.compatibility.dto.ProjectDTO;
+import com.hope.projectrepository.util.dto.ProjectDTO;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 import org.springframework.web.multipart.MultipartFile;
 

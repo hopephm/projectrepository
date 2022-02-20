@@ -1,4 +1,4 @@
-package com.hope.projectrepository.compatibility.dto;
+package com.hope.projectrepository.util.dto;
 
 import lombok.*;
 

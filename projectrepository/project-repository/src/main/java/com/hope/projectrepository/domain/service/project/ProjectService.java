@@ -1,12 +1,11 @@
 package com.hope.projectrepository.domain.service.project;
 
-import com.hope.projectrepository.compatibility.dto.ProjectContentAndFileInfoDTO;
-import com.hope.projectrepository.compatibility.dto.ProjectDTO;
+import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
+import com.hope.projectrepository.util.dto.ProjectDTO;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface ProjectService {

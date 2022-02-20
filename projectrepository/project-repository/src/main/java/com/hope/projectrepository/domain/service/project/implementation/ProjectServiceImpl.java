@@ -1,8 +1,8 @@
 package com.hope.projectrepository.domain.service.project.implementation;
 
 import com.hope.projectrepository.domain.entity.ProjectOverview;
-import com.hope.projectrepository.compatibility.dto.ProjectContentAndFileInfoDTO;
-import com.hope.projectrepository.compatibility.dto.ProjectDTO;
+import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
+import com.hope.projectrepository.util.dto.ProjectDTO;
 import com.hope.projectrepository.domain.service.project.ProjectService;
 import com.hope.projectrepository.domain.service.project.file.FileManager;
 import com.hope.projectrepository.domain.service.project.finder.ProjectFinder;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 public class ProjectServiceImpl implements ProjectService {

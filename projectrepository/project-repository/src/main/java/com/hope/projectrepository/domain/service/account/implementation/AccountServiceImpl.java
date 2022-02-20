@@ -1,13 +1,12 @@
 package com.hope.projectrepository.domain.service.account.implementation;
 
 import com.hope.projectrepository.domain.entity.User;
-import com.hope.projectrepository.compatibility.dto.AccountDTO;
+import com.hope.projectrepository.util.dto.AccountDTO;
 import com.hope.projectrepository.domain.service.account.AccountService;
 import com.hope.projectrepository.domain.service.account.manager.AccountManager;
 import com.hope.projectrepository.domain.service.account.verifier.AccountVerifier;
 import com.hope.projectrepository.exception.service.account.AccountDoesNotExistException;
 import com.hope.projectrepository.util.global.ContextManager;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;

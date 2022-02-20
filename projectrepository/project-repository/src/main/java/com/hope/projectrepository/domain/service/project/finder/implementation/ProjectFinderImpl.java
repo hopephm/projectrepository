@@ -1,6 +1,6 @@
 package com.hope.projectrepository.domain.service.project.finder.implementation;
 
-import com.hope.projectrepository.compatibility.dto.ProjectContentAndFileInfoDTO;
+import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
 import com.hope.projectrepository.domain.entity.FileInfo;
 import com.hope.projectrepository.domain.entity.ProjectContent;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
@@ -13,9 +13,7 @@ import com.hope.projectrepository.domain.service.project.finder.ProjectFinder;
 import com.hope.projectrepository.exception.service.project.ProjectOverviewDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataAccessException;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 public class ProjectFinderImpl implements ProjectFinder {

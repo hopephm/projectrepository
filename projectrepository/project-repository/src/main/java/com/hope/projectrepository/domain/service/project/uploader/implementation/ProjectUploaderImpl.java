@@ -1,7 +1,7 @@
 package com.hope.projectrepository.domain.service.project.uploader.implementation;
 
-import com.hope.projectrepository.compatibility.dto.ProjectContentDTO;
-import com.hope.projectrepository.compatibility.dto.ProjectDTO;
+import com.hope.projectrepository.util.dto.ProjectContentDTO;
+import com.hope.projectrepository.util.dto.ProjectDTO;
 import com.hope.projectrepository.domain.entity.ProjectContent;
 import com.hope.projectrepository.domain.entity.ProjectOverview;
 import com.hope.projectrepository.domain.entity.User;

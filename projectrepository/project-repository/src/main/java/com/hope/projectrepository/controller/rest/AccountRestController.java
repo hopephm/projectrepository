@@ -13,30 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+// 여유될 때, RestFul하게 CRUD 맞춰서 추가하자
 @RestController
 @RequestMapping("/rest/account")
 public class AccountRestController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping("/users/{userId}")
-    @ExceptionHandling
-    public String findUserByUserId(@PathVariable Long userId){
-        User user = accountService.getUserById(userId);
-
-        JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("user", user);
-
-        return jr.getResponse();
-    }
-
     @PostMapping("/users")
     @ExceptionHandling
-    public String createAccount(Model model,
-                         @RequestParam("user_id") String loginId,
-                         @RequestParam("user_password") String password,
-                         @RequestParam("user_email") String email,
-                         @RequestParam("user_nickname") String nickname){
+    public String createUser(@RequestParam("user_id") String loginId,
+                             @RequestParam("user_password") String password,
+                             @RequestParam("user_email") String email,
+                             @RequestParam("user_nickname") String nickname){
 
         AccountDTO accountDTO = new AccountDTO(loginId, password, email, nickname);
         accountService.createAccount(accountDTO);
@@ -46,11 +35,22 @@ public class AccountRestController {
         return jr.getResponse();
     }
 
+    @GetMapping("/users/{userId}")
+    @ExceptionHandling
+    public String getUser(@PathVariable Long userId){
+        User user = accountService.getUserById(userId);
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("user", user);
+
+        return jr.getResponse();
+    }
+
     @DeleteMapping("/users")
     @ExceptionHandling
-    public String deleteAccount(HttpServletRequest request, HttpServletResponse response){
+    public String deleteUser(HttpServletRequest request, HttpServletResponse response){
         accountService.deleteCurrentAccount();
-        accountService.logoutCurrentAccount(request,response);
+        accountService.logoutCurrentAccount(request, response);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
 
@@ -59,7 +59,7 @@ public class AccountRestController {
 
     @GetMapping("/nicknames/exists/{nickname}")
     @ExceptionHandling
-    public String isDuplicateNickname(@PathVariable String nickname){
+    public String nicknameEixistCheck(@PathVariable String nickname){
         Boolean result = accountService.isExistNickname(nickname);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
@@ -71,7 +71,7 @@ public class AccountRestController {
 
     @GetMapping("/ids/exists/{loginId}")
     @ExceptionHandling
-    public String isDuplicateLoginId(@PathVariable String loginId){
+    public String loginIdExistCheck(@PathVariable String loginId){
         Boolean result = accountService.isExistLoginId(loginId);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
@@ -82,8 +82,7 @@ public class AccountRestController {
 
     @PostMapping("/emails/send")
     @ExceptionHandling
-    public String sendEmailVerificationCode(Model model,
-                                                          @RequestParam("user_email") String email){
+    public String sendJoinVerificationCodeEmail(@RequestParam("user_email") String email){
         accountService.sendVerificationCode(email, email);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
@@ -93,9 +92,8 @@ public class AccountRestController {
 
     @PostMapping("/emails/verify")
     @ExceptionHandling
-    public String verifyCode(Model model,
-                                           @RequestParam("user_email") String email,
-                                           @RequestParam("verify_code") String code){
+    public String checkVerificationCode(@RequestParam("user_email") String email,
+                                        @RequestParam("verify_code") String code){
         accountService.verifyCode(email, code);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
@@ -105,7 +103,7 @@ public class AccountRestController {
 
     @GetMapping("/users/ids")
     @ExceptionHandling
-    public String findLoginIdByEmail(@RequestParam("user_email") String email){
+    public String getUsersByEmail(@RequestParam("user_email") String email){
         List<String> idList = accountService.findLoginIdsByEmail(email);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
@@ -116,9 +114,8 @@ public class AccountRestController {
 
     @PostMapping("/users/passwords/find")
     @ExceptionHandling
-    public String sendResetPasswordEmail(Model model,
-                                             @RequestParam("user_id") String loginId,
-                                             @RequestParam("user_email") String email){
+    public String sendPasswordResetEmail(@RequestParam("user_id") String loginId,
+                                         @RequestParam("user_email") String email){
         accountService.changeAccountStateAndSendResetEmail(email, loginId);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();

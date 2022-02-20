@@ -11,7 +11,7 @@ public class LoginController {
 //    POST  /login?username={userName}&password={passWord}
 
     @GetMapping("/login")
-    public String unitedLoginPage(){
+    public String loginPage(){
         return "login/login";
     }
 
@@ -24,7 +24,7 @@ public class LoginController {
     }
 
     @GetMapping("/logout/success")
-    public String logoutPage(){
+    public String logoutSuccessPage(){
         return "login/logout_success";
     }
 }

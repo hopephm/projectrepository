@@ -11,7 +11,7 @@ public class HomeController {
         return "home";
     }
     @GetMapping("/denied")
-    public String requestDeniedPage(Model model){
+    public String deniedPage(Model model){
         return "denied";
     }
 }

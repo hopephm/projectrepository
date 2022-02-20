@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ProjectController {
     @GetMapping("/search")
-    public String projectHome(){
+    public String projectSearchPage(){
         return "project/project_search";
     }
 
     @GetMapping("/project")
-    public String projectLookup(@RequestParam("project_id") String projectId){
+    public String projectLookupPage(@RequestParam("project_id") String projectId){
         return "project/project_lookup";
     }
 
     @GetMapping("/upload")
-    public String uploadProjectView(Model model){
+    public String projectUploadPage(){
         return "project/project_upload";
     }
+
+    @GetMapping("/upload/edit")
+    public String projectUpdatePage(@RequestParam("project_id") String projectId){ return "project/project_edit";}
 }

@@ -12,7 +12,7 @@ public class AccountController {
     }
 
     @GetMapping("/find/id")
-    public String findId(){
+    public String findIdPage(){
         return "account/find_id";
     }
 
@@ -20,12 +20,12 @@ public class AccountController {
     public String deleteAccountPage(){ return "account/delete_account"; }
 
     @GetMapping("/find/pw")
-    public String findPw(Model model){
+    public String findPasswordPage(Model model){
         return "account/find_pw";
     }
 
     @GetMapping("/find/pw/reset")
-    public String findPwResult(@RequestParam("user_id") String loginId,
+    public String findPasswordResultPage(@RequestParam("user_id") String loginId,
                                @RequestParam("key") String resetKey) {
         return "account/find_pw_result";
     }

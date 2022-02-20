@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09ff75ab-9ecc-452d-9527-7fc8ea73e38e" name="Default Changelist" comment="" />
+    <list default="true" id="09ff75ab-9ecc-452d-9527-7fc8ea73e38e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +39,7 @@
         <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -61,6 +64,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates" />
@@ -72,14 +76,15 @@
       <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\test\java\com\hope\projectrepository\exception" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\main\resources\templates\exception" />
       <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\main\resources\templates.exception" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.hope.projectrepository.util" />
       <recent name="com.hope.projectrepository.exception.handle" />
       <recent name="com.hope.projectrepository.exception.global" />
       <recent name="com.hope.projectrepository.domain.service.login" />
       <recent name="com.hope.projectrepository.domain.service.login.implementation" />
-      <recent name="com.hope.projectrepository.exception.service.login" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ProjectRepositoryApplication">

@@ -22,19 +22,6 @@ public class ProjectRestController {
     @Autowired
     ProjectService projectService;
 
-    @GetMapping("/projects")
-    @ExceptionHandling
-    public String getProjects( @RequestParam("category") @Nullable String category,
-                               @RequestParam("orderby") @Nullable String orderby,
-                               @RequestParam("search_text") @Nullable String text) {
-        List<ProjectOverview> projectList = projectService.search(category, orderby, text);
-
-        JsonResponseWrapper jr = new JsonResponseWrapper();
-        jr.addData("project_list", projectList);
-
-        return jr.getResponse();
-    }
-
     @GetMapping("/projects/{projectId}")
     @ExceptionHandling
     public String getProject (@PathVariable String projectId) {
@@ -49,9 +36,22 @@ public class ProjectRestController {
         return jr.getResponse();
     }
 
+    @GetMapping("/projects")
+    @ExceptionHandling
+    public String getProjectsByFiltering( @RequestParam("category") @Nullable String category,
+                               @RequestParam("orderby") @Nullable String orderby,
+                               @RequestParam("search_text") @Nullable String text) {
+        List<ProjectOverview> projectList = projectService.search(category, orderby, text);
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("project_list", projectList);
+
+        return jr.getResponse();
+    }
+
     @PostMapping("/projects")
     @ExceptionHandling
-    public String uploadProject(Model model,
+    public String createProject(Model model,
                          @RequestPart(value="file") MultipartFile[] files,
                          @RequestPart(value="projectDTO") ProjectDTO projectDTO){
         ProjectOverview newOverview = projectService.uploadProject(projectDTO, files);
@@ -63,7 +63,7 @@ public class ProjectRestController {
     }
 
     @GetMapping("/files/{fileId}")
-    public ResponseEntity<byte[]> showFile(HttpServletResponse response,
+    public ResponseEntity<byte[]> getFile(HttpServletResponse response,
                                    @PathVariable String fileId){
         ResponseEntity<byte[]> entity = projectService.getFile(fileId);
         return entity;

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+  <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+  <title>Project Repository: Edit</title>
+</head>
+<body>
+
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script th:src="@{/js/util/csrf.js}"></script>
+  <script th:src="@{/js/util/global.js}"></script>
+  <script th:src="@{/js/project/project_edit.js}"></script>
+</body>
+</html>

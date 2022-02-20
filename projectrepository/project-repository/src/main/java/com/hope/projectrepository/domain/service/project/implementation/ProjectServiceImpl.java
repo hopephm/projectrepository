@@ -8,6 +8,7 @@ import com.hope.projectrepository.domain.service.project.file.FileManager;
 import com.hope.projectrepository.domain.service.project.finder.ProjectFinder;
 import com.hope.projectrepository.domain.service.project.uploader.ProjectUploader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +38,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectUploader.uploadProject(projectDTO, files);
     }
 
-    public void sendFileToClient(HttpServletResponse response, String fileId){
-        fileManager.sendFileToClient(response, fileId);
+    public ResponseEntity<byte[]> getFile(String fileId){
+        return fileManager.getFile(fileId);
     }
 }

@@ -7,6 +7,7 @@ import com.hope.projectrepository.domain.service.project.ProjectService;
 import com.hope.projectrepository.exception.handle.ExceptionHandling;
 import com.hope.projectrepository.util.response.json.JsonResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,13 +63,9 @@ public class ProjectRestController {
     }
 
     @GetMapping("/files/{fileId}")
-    @ExceptionHandling
-    public String sendFile(HttpServletResponse response,
-                         @PathVariable String fileId){
-        projectService.sendFileToClient(response, fileId);
-
-        JsonResponseWrapper jr = new JsonResponseWrapper();
-
-        return jr.getResponse();
+    public ResponseEntity<byte[]> showFile(HttpServletResponse response,
+                                   @PathVariable String fileId){
+        ResponseEntity<byte[]> entity = projectService.getFile(fileId);
+        return entity;
     }
 }

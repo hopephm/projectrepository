@@ -10,7 +10,6 @@ public class HomeController {
     public String homePage(Model model){
         return "home";
     }
-
     @GetMapping("/denied")
     public String requestDeniedPage(Model model){
         return "denied";

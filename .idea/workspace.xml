@@ -65,10 +65,12 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/projectrepository/project-repository/src/main/resources/templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\main\resources\templates" />
+      <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\main\resources\static" />
       <recent name="E:\공부\project\project_repository_github\projectrepository\project-repository\src\test\java\com\hope\projectrepository\exception" />
     </key>
     <key name="MoveFile.RECENT_KEYS">

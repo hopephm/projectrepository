@@ -62,6 +62,7 @@ function createFileInfoTr(fileId, fileName){
     if(fileId != "null"){
         var a = createElement("a", "none", fileName);
         a.setAttribute("href", "/rest/project/files/"+fileId);
+        a.setAttribute("target", "_blank");
         td.appendChild(a);
     }
 

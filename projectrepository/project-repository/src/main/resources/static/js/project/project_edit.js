@@ -273,7 +273,11 @@ function setProjectOverviewInputValue(projectOverview){
 
 function setContentValue(projectContent, idx){
     content_info[idx]["title"].value = projectContent["sub_title"];
-    content_info[idx]["content"].value = projectContent["content"];
+    var text = projectContent["content"];
+    text = text.replaceAll("</br>", "\n");
+    text = text.replaceAll("<br/>", "\n");
+    text = text.replaceAll("<br />", "\n");
+    content_info[idx]["content"].value = text;
 
     //    setFile
     //    content_info[idx]["file"].value = projectContent["file_name"];
@@ -291,7 +295,8 @@ function setContentUl(){
     var lis = content_ul.querySelectorAll("li");
     lis.forEach((li, idx)=>{
         var btn = li.querySelector("button");
-        btn.innerText = content_info[idx]["title"].value;
+        var text = content_info[idx]["title"].value;
+        btn.innerText = text;
     });
 }
 

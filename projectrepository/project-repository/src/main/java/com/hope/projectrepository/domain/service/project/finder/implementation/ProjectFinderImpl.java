@@ -93,8 +93,10 @@ public class ProjectFinderImpl implements ProjectFinder {
 
     private List<ProjectOverview> searchByCategory(String category, String text){
         List<ProjectOverview> result = null;
+        if(!isValidateCategory(category))
+            category = TITLE;
 
-        if(!isCategoryExist(category)){
+        if(isEmptyString(text)){
             result = findAllProjectOverviews();
         }else if(category.equals(TITLE)){
             result = findProjectOverviewsByTitle(text);
@@ -113,10 +115,16 @@ public class ProjectFinderImpl implements ProjectFinder {
         return result;
     }
 
-    private boolean isCategoryExist(String category){
-        if(category == null || category.equals(NONE))
-            return false;
-        return true;
+    private boolean isEmptyString(String text){
+        if(text == null || text.equals(""))
+            return true;
+        return false;
+    }
+
+    private boolean isValidateCategory(String category){
+        if(category.equals(TITLE) || category.equals(TITLE_AND_CONTENT) || category.equals(NICKNAME) || category.equals(CONTENT) || category.equals(TECHSTACK))
+            return true;
+        return false;
     }
 
     private List<ProjectOverview> findAllProjectOverviews(){
@@ -172,16 +180,16 @@ public class ProjectFinderImpl implements ProjectFinder {
     }
 
     private void sortProjectOverviews(List<ProjectOverview> result, String orderby){
-        if(isOrderbyExist(orderby) && isResultExist(result)){
+        if(isValidateOrderby(orderby) && isResultExist(result)){
             Comparator<ProjectOverview> comparator = getComparator(orderby);
             result.sort(comparator);
         }
     }
 
-    private boolean isOrderbyExist(String orderby){
-        if(orderby == null || orderby.equals("none"))
-            return false;
-        return true;
+    private boolean isValidateOrderby(String orderby){
+        if(orderby.equals(START_DATE) || orderby.equals(END_DATE) || orderby.equals(NICKNAME) || orderby.equals(TITLE))
+            return true;
+        return false;
     }
 
     private boolean isResultExist(List<ProjectOverview> projects){

@@ -1,5 +1,6 @@
 package com.hope.projectrepository.controller.view;
 
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ProjectController {
     @GetMapping("/search")
-    public String projectSearchPage(){
+    public String projectSearchPage(@RequestParam("category") @Nullable String category,
+                                    @RequestParam("orderby") @Nullable String orderby,
+                                    @RequestParam("search_text") @Nullable String text){
         return "project/project_search";
     }
 

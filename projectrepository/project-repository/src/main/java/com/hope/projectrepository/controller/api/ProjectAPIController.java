@@ -39,7 +39,7 @@ public class ProjectAPIController {
 
     @GetMapping("/projects")
     @ExceptionHandling
-    public String getProjectsByFiltering( @RequestParam("category") @Nullable String category,
+    public String getProjectsByFiltering(@RequestParam("category") @Nullable String category,
                                @RequestParam("orderby") @Nullable String orderby,
                                @RequestParam("search_text") @Nullable String text) {
         List<ProjectOverview> projectList = projectService.search(category, orderby, text);

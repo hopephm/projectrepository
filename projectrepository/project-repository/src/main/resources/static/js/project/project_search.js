@@ -62,18 +62,41 @@ function createProjectOverviewTr(project){
 }
 
 function showProjectList(projectList){
-    var table = createElement("table");
-    var tbody = createElement("tbody");
-    var headTr = createHeadTr();
-    tbody.appendChild(headTr);
+    if(projectList != null){
+        if(projectList.constructor == Array){
+            var table = createElement("table");
+            var tbody = createElement("tbody");
+            var headTr = createHeadTr();
+            tbody.appendChild(headTr);
 
-    projectList.forEach((project)=>{
-        var projectTr = createProjectOverviewTr(project);
-        tbody.appendChild(projectTr);
+            projectList.forEach((project)=>{
+                var projectTr = createProjectOverviewTr(project);
+                tbody.appendChild(projectTr);
+            });
+
+            table.appendChild(tbody);
+            project_list.appendChild(table);
+        }
+    }
+}
+
+function requestProjectInfo(data){
+    $.ajax({
+        url: "/api/project/projects",
+        data: data,
+        type: "GET",
+        success:function(res){
+            const json = JSON.parse(res);
+            const res_code = json["code"];
+
+            deletePreviousResult();
+            if(res_code==SUCCESS){
+                showProjectList(json["data"]["project_list"]);
+            }else{
+                alert("프로젝트 로드에 실패하였습니다.");
+            }
+        }
     });
-
-    table.appendChild(tbody);
-    project_list.appendChild(table);
 }
 
 function searchBtnOnClickHandler(event){
@@ -87,25 +110,28 @@ function searchBtnOnClickHandler(event){
         search_text: search_text_val
     };
 
-    $.ajax({
-        url: "/api/project/projects",
-        data: data,
-        type: "GET",
-        success:function(res){
-            const json = JSON.parse(res);
-            const res_code = json["code"];
+    requestProjectInfo(data);
+}
 
-            if(res_code==SUCCESS){
-                deletePreviousResult();
-                showProjectList(json["data"]["project_list"]);
-            }else{
-                alert("프로젝트 로드에 실패하였습니다.");
-            }
-        }
-    });
+function showProjectByQueryString(){
+    var param = getCurrentParams();
+    var category = param.get("category");
+    var orderby = param.get("orderby");
+    var search_text = param.get("search_text");
+
+    if(category == null) category = "title";
+
+    data = {
+        category: category,
+        orderby: orderby,
+        search_text: search_text
+    };
+
+    requestProjectInfo(data);
 }
 
 function init(){
+    showProjectByQueryString();
     search_btn.addEventListener("click", searchBtnOnClickHandler);
 }
 

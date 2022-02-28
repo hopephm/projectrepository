@@ -67,19 +67,23 @@ public class JsonResponseWrapper {
     public void addData(String key, List<?> objList){
         JsonObject dataObj = getDataJsonObj();
 
-        JsonArray arr = new JsonArray();
-        for(Object obj: objList){
-            if(obj instanceof String)
-                arr.add((String)obj);
-            else if(obj instanceof ProjectOverview)
-                arr.add(createProjectOverviewJsonObject((ProjectOverview) obj));
-            else if(obj instanceof User)
-                arr.add(createUserJsonObject((User)obj));
-            else if(obj instanceof ProjectContentAndFileInfoDTO)
-                arr.add(createContentAndFileJsonObject((ProjectContentAndFileInfoDTO) obj));
-        }
+        if(objList == null){
+            dataObj.addProperty(key, "null");
+        }else{
+            JsonArray arr = new JsonArray();
+            for(Object obj: objList){
+                if(obj instanceof String)
+                    arr.add((String)obj);
+                else if(obj instanceof ProjectOverview)
+                    arr.add(createProjectOverviewJsonObject((ProjectOverview) obj));
+                else if(obj instanceof User)
+                    arr.add(createUserJsonObject((User)obj));
+                else if(obj instanceof ProjectContentAndFileInfoDTO)
+                    arr.add(createContentAndFileJsonObject((ProjectContentAndFileInfoDTO) obj));
+            }
 
-        dataObj.add(key,arr);
+            dataObj.add(key,arr);
+        }
     }
 
     private JsonObject createProjectOverviewJsonObject(ProjectOverview po){

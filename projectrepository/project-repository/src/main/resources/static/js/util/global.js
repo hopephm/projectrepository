@@ -9,3 +9,8 @@ function createElement(element, className, text){
         el.innerText=text;
     return el;
 }
+
+function getCurrentParams(){
+    const url = new URL(window.location.href);
+    return url.searchParams;
+}

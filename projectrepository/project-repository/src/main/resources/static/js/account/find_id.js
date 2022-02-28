@@ -29,7 +29,7 @@ function findBtnOnClickHandler(event){
     }
 
     $.ajax({
-       url:"/rest/account/users/ids",
+       url:"/api/account/users/ids",
        data: data,
        type:"GET",
        success:function(res){

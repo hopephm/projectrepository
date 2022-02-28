@@ -13,6 +13,7 @@ public interface ProjectService {
     public ProjectOverview getProjectOverview(String projectId);
     public List<ProjectContentAndFileInfoDTO> getProjectContentAndFiles(ProjectOverview projectOverview);
     public ProjectOverview uploadProject(ProjectDTO projectDTO, MultipartFile[] files);
+    public ProjectOverview updateProject(ProjectDTO projectDTO, MultipartFile[] files, String projectId);
 
     public ResponseEntity<byte[]> getFile(String fileId);
 //    public void sendFileToClient(HttpServletResponse response, String fileId);

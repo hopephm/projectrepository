@@ -6,4 +6,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ProjectUploader {
     public ProjectOverview uploadProject(ProjectDTO projectDTO, MultipartFile[] files);
+    public ProjectOverview updateProject(ProjectDTO projectDTO, MultipartFile[] files, String projectId);
 }

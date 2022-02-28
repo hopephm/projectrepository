@@ -22,7 +22,7 @@ function resetBtnOnClickHandler(event){
     };
 
     $.ajax({
-        url: "/rest/account/users/passwords/reset",
+        url: "/api/account/users/passwords/reset",
         data: data,
         type: "POST",
         success:function(res){

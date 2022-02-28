@@ -88,7 +88,7 @@ function searchBtnOnClickHandler(event){
     };
 
     $.ajax({
-        url: "/rest/project/projects",
+        url: "/api/project/projects",
         data: data,
         type: "GET",
         success:function(res){

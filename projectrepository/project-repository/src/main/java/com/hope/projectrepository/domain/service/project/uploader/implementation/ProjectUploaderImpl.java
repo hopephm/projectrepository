@@ -1,5 +1,6 @@
 package com.hope.projectrepository.domain.service.project.uploader.implementation;
 
+import com.hope.projectrepository.exception.service.project.ProjectOverviewDoesNotExistException;
 import com.hope.projectrepository.util.dto.ProjectContentDTO;
 import com.hope.projectrepository.util.dto.ProjectDTO;
 import com.hope.projectrepository.domain.entity.ProjectContent;
@@ -17,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 public class ProjectUploaderImpl implements ProjectUploader {
     @Autowired
@@ -31,13 +34,13 @@ public class ProjectUploaderImpl implements ProjectUploader {
     public ProjectOverview uploadProject(ProjectDTO projectDTO, MultipartFile[] files){
         User user = ContextManager.getCurrentUser();
 
-        ProjectOverview projectOverview = saveProjectOverview(projectDTO, user);
+        ProjectOverview projectOverview = saveNewProjectOverview(projectDTO, user);
         saveProjectContentAndFiles(projectDTO, files, projectOverview);
 
         return projectOverview;
     }
 
-    private ProjectOverview saveProjectOverview(ProjectDTO projectDTO, User user){
+    private ProjectOverview saveNewProjectOverview(ProjectDTO projectDTO, User user){
         String title = projectDTO.getTitle();
         String subject = projectDTO.getSubject();
         String scale = projectDTO.getScale();
@@ -98,5 +101,55 @@ public class ProjectUploaderImpl implements ProjectUploader {
         if(file.getOriginalFilename().equals("__dummy"))
             return false;
         return true;
+    }
+
+    public ProjectOverview updateProject(ProjectDTO projectDTO, MultipartFile[] files, String projectId){
+        ProjectOverview projectOverview = findProjectOverviewById(projectId);
+        updateProjectOverview(projectOverview, projectDTO);
+
+        deleteOriginContents(projectOverview);
+        saveProjectContentAndFiles(projectDTO, files, projectOverview);
+
+        return projectOverview;
+    }
+
+    private ProjectOverview findProjectOverviewById(String projectId){
+        Optional<ProjectOverview> optProjectOverview = projectOverviewRepository.findById(Long.parseLong(projectId));
+        ProjectOverview projectOverview = optProjectOverview.get();
+
+        if(projectOverview == null)
+            throw new ProjectOverviewDoesNotExistException();
+
+        return projectOverview;
+    }
+
+    private void updateProjectOverview(ProjectOverview projectOverview, ProjectDTO projectDTO){
+        String title = projectDTO.getTitle();
+        String subject = projectDTO.getSubject();
+        String scale = projectDTO.getScale();
+        String techstack = projectDTO.getTechstack();
+        String startDate =projectDTO.getProjectStartDate();
+        String endDate = projectDTO.getProjectEndDate();
+
+        projectOverview.setMainTitle(title);
+        projectOverview.setSubject(subject);
+        projectOverview.setScale(scale);
+        projectOverview.setTechStack(techstack);
+        projectOverview.setProjectStartDate(parseDate(startDate));
+        projectOverview.setProjectEndDate(parseDate(endDate));
+        projectOverview.setUpdateDate(LocalDateTime.now());
+
+        projectOverviewRepository.save(projectOverview);
+    }
+
+    private void deleteOriginContents(ProjectOverview projectOverview){
+        List<ProjectContent> projectContentList = projectContentRepository.findByProjectOverview(projectOverview);
+
+        for(ProjectContent projectContent: projectContentList){
+            if(projectContent != null){
+                fileManager.deleteFile(projectContent);
+                projectContentRepository.delete(projectContent);
+            }
+        }
     }
 }

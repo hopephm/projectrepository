@@ -11,7 +11,7 @@ const project = document.querySelector(".project"),
     content_last_li = project.querySelector(".last_content"),
     content_last_btn = content_last_li.querySelector("button"),
 
-    subtitle_holder = project.querySelector(".sub_title_holder"),
+    sub_title_holder = project.querySelector(".sub_title_holder"),
     file_holder = project.querySelector(".file_holder"),
     content_holder = project.querySelector(".content_holder"),
 
@@ -68,31 +68,39 @@ function getOverviewInfo(){
 function getContentInfo(formData){
     var contentDTOS = [];
 
-    for(let i = 0; i < content_info.length; i++){
+    content_info.forEach((content, idx)=>{
         var contentDTO={};
-        contentDTO["contentTitle"] = content_info[i]["title"].value;
-        contentDTO["content"] = content_info[i]["content"].value;
-        contentDTO["no"] = i;
-
-        if(content_info[i]["file"].value){
-            var file_element = content_info[i]["file"].files[0];
-            formData.append("file", file_element);
-        }else{
-            contentDTO["fileName"] = "null";
-            formData.append("file", new File([" "], "__dummy", {type: "text/plain",}));
-        }
+        contentDTO["contentTitle"] = content["title"].value;
+        contentDTO["content"] = content["content"].value;
+        contentDTO["no"] = idx;
 
         contentDTOS.push(contentDTO);
-    }
+    });
 
     return contentDTOS;
 }
 
+function setFileToFormData(formData){
+    fileList = [];
+    content_info.forEach((content,idx)=>{
+        var file;
+
+        if(content["file"].value) file = content["file"].files[0];
+        else file = new File([" "], "__dummy", {type: "text/plain",});
+
+        formData.append("file", file);
+    });
+}
+
 function constructFormData(){
     var formData = new FormData();
+
     var info = getOverviewInfo();
     info["contentDTOS"] = getContentInfo(formData);
+    setFileToFormData(formData);
+
     formData.append('projectDTO', new Blob([JSON.stringify(info)] , {type: "application/json"}));
+
     return formData;
 }
 
@@ -100,7 +108,7 @@ function uploadBtnOnClickHandler(event){
     var data = constructFormData();
     if(checkInput(data)){
         $.ajax({
-            url:"/rest/project/projects",
+            url:"/api/project/projects",
             data: data,
             processData: false,
             contentType: false,
@@ -113,19 +121,18 @@ function uploadBtnOnClickHandler(event){
                     const project_id = json["data"]["project_overview"]["project_id"];
                     window.location.href = "/project?project_id=" + project_id;
                 }else{
-                    alert(`프로젝트가 업로드 실패`);
+                    alert("프로젝트가 업로드 실패");
                 }
-
             }
         });
     }
 }
 
 function changeTo(od){
-    while(subtitle_holder.hasChildNodes()){
-        subtitle_holder.removeChild(subtitle_holder.firstChild);
+    while(sub_title_holder.hasChildNodes()){
+        sub_title_holder.removeChild(sub_title_holder.firstChild);
     }
-    subtitle_holder.appendChild(content_info[od]["title"]);
+    sub_title_holder.appendChild(content_info[od]["title"]);
 
     while(file_holder.hasChildNodes()){
         file_holder.removeChild(file_holder.firstChild);
@@ -159,14 +166,14 @@ function setButtonText(btn){
 
 function constructButton(){
     var btn = createElement("button", "sub_title");
-    btn.addEventListener("click", subtitleBtnOnClickHandler);
+    btn.addEventListener("click", subTitleBtnOnClickHandler);
     setButtonText(btn);
     return btn;
 }
 
-function constructNewContentLi(){
+function constructNewContentLi(order){
     var content_li = createElement("li", "horizontal");
-    content_li.setAttribute("order", content_info.length-1);
+    content_li.setAttribute("order", order);
 
     var content_btn = constructButton();
     content_li.appendChild(content_btn);
@@ -178,11 +185,11 @@ function setLastOrder(){
     content_last_li.setAttribute("order", parseInt(content_last_li.getAttribute("order")) +1);
 }
 
-function setContentInfo(){
+function createInputAndPushToContentInfo(){
     var ntitle = document.createElement("input");
         ntitle.setAttribute("type", "text");
         ntitle.setAttribute("name", "contentTitle");
-        ntitle.addEventListener("input", subtitleInputOnChangeHandler);
+        ntitle.addEventListener("input", subTitleInputOnChangeHandler);
     var ncontent = document.createElement("textarea");
         ncontent.setAttribute("name", "content");
         ncontent.setAttribute("cols", 50);
@@ -195,24 +202,24 @@ function setContentInfo(){
 }
 
 function createNewContent(){
-    var content_li = constructNewContentLi();
+    var content_li = constructNewContentLi(content_info.length-1);
 
     setLastOrder();
-    setContentInfo();
+    createInputAndPushToContentInfo();
 
     content_ul.insertBefore(content_li, content_last_li);
     content_last_btn.innerText = "새 항목";
 }
 
 
-function subtitleBtnOnClickHandler(event){
+function subTitleBtnOnClickHandler(event){
     var li = event.currentTarget.parentElement;
     var od = parseInt(li.getAttribute("order"));
 
     changeTo(od);
 }
 
-function subtitleInputOnChangeHandler(event){
+function subTitleInputOnChangeHandler(event){
     var t = event.currentTarget.value;
     var btn = content_ul.querySelector(`li:nth-child(${current_content+1}) > button`);
     btn.innerText = summarize(t);
@@ -226,8 +233,8 @@ function addBtnOnClickHandler(event){
 function init(){
     upload_btn.addEventListener("click", uploadBtnOnClickHandler);
     add_btn.addEventListener("click", addBtnOnClickHandler);
-    content_last_btn.addEventListener("click", subtitleBtnOnClickHandler);
-    content_title.addEventListener("input", subtitleInputOnChangeHandler);
+    content_last_btn.addEventListener("click", subTitleBtnOnClickHandler);
+    content_title.addEventListener("input", subTitleInputOnChangeHandler);
 }
 
 init();

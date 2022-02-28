@@ -3,7 +3,7 @@ const yes_btn = document.querySelector(".yes_btn"),
 
 function yesBtnOnClickHandler(event){
     $.ajax({
-        url: "/rest/account/users",
+        url: "/api/account/users",
         type:"DELETE",
         success:function(res){
             const json = JSON.parse(res);

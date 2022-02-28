@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
@@ -134,5 +135,10 @@ public class FileManagerImpl implements FileManager {
                 .build();
 
         fileInfoRepository.save(fileInfo);
+    }
+
+    public void deleteFile(ProjectContent content){
+        FileInfo fileInfo = fileInfoRepository.findByProjectContent(content);
+        if(fileInfo != null) fileInfoRepository.delete(fileInfo);
     }
 }

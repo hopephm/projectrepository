@@ -10,13 +10,11 @@ const overview = document.querySelector(".overview"),
 const content_list = document.querySelector(".content_list");
 const content_holder = document.querySelector(".content_holder");
 
-var current_content = 0;
-var content = [];
+const edit_btn = document.querySelector(".edit_btn");
 
-function getCurrentParams(){
-    const url = new URL(window.location.href);
-    return url.searchParams;
-}
+var current_content = 0;
+var project_id;
+var content = [];
 
 function showProjectOverview(projectOverview){
     main_title.innerText=projectOverview["main_title"];
@@ -61,7 +59,7 @@ function createFileInfoTr(fileId, fileName){
 
     if(fileId != "null"){
         var a = createElement("a", "none", fileName);
-        a.setAttribute("href", "/rest/project/files/"+fileId);
+        a.setAttribute("href", "/api/project/files/"+fileId);
         a.setAttribute("target", "_blank");
         td.appendChild(a);
     }
@@ -124,7 +122,7 @@ function loadProject(){
     var id = params.get("project_id");
 
     $.ajax({
-        url: "/rest/project/projects/"+id,
+        url: "/api/project/projects/"+id,
         type: "GET",
         success:function(res){
             const json = JSON.parse(res);
@@ -132,6 +130,7 @@ function loadProject(){
 
             if(res_code==SUCCESS){
                 const projectOverview = json["data"]["project_overview"];
+                project_id = projectOverview["project_id"];
                 showProjectOverview(projectOverview);
 
                 const projectContentList = json["data"]["project_content_list"];
@@ -145,8 +144,13 @@ function loadProject(){
     });
 }
 
+function editBtnOnClickHandler(event){
+    window.location.href="/upload/edit?project_id=" + project_id;
+}
+
 function init(){
     loadProject();
+    edit_btn.addEventListener("click", editBtnOnClickHandler);
 }
 
 init();

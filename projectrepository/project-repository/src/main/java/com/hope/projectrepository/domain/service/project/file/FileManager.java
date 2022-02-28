@@ -10,4 +10,5 @@ public interface FileManager {
     public ResponseEntity<byte[]> getFile(String fileId);
 //    public void sendFileToClient(HttpServletResponse response, String fileId);
     public void uploadFile(ProjectContent content, MultipartFile file);
+    public void deleteFile(ProjectContent content);
 }

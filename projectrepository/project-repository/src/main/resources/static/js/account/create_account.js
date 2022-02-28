@@ -62,12 +62,12 @@ function duplicated_check(item_element, value, item_name, check_url){
 
 function nicknameCheckBtnOnClickHandler(event){
     var val = nickname_input.value;
-    duplicated_check(nickname, val, "닉네임", "/rest/account/nicknames/exists");
+    duplicated_check(nickname, val, "닉네임", "/api/account/nicknames/exists");
 }
 
 function idCheckBtnOnClickHandler(event){
     var val = id_input.value;
-    duplicated_check(id, val, "아이디", "/rest/account/ids/exists");
+    duplicated_check(id, val, "아이디", "/api/account/ids/exists");
 }
 
 function pwCheckBtnOnClickHandler(event){
@@ -95,7 +95,7 @@ function emailCheckBtnOnClickHandler(event){
     check_email_btn.disabled = true;
 
     $.ajax({
-        url:"/rest/account/emails/send",
+        url:"/api/account/emails/send",
         data:data,
         type:"POST",
         success:function(res){
@@ -121,7 +121,7 @@ function verifyCodeCheckBtnOnClickHandler(event){
     };
 
     $.ajax({
-        url:"/rest/account/emails/verify",
+        url:"/api/account/emails/verify",
         data:data,
         type:"POST",
         success:function(res){
@@ -168,7 +168,7 @@ function joinBtnOnClickHandler(event){
             user_nickname: nickname_val
         };
         $.ajax({
-           url:"/rest/account/users",
+           url:"/api/account/users",
            data: data,
            type:"POST",
            success:function(res){

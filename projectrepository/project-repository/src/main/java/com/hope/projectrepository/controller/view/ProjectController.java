@@ -24,5 +24,5 @@ public class ProjectController {
     }
 
     @GetMapping("/upload/edit")
-    public String projectUpdatePage(@RequestParam("project_id") String projectId){ return "project/project_edit";}
+    public String projectEditPage(@RequestParam("project_id") String projectId){ return "project/project_edit";}
 }

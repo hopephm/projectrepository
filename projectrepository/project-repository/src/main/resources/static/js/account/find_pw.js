@@ -14,7 +14,7 @@ function sendResetMailBtnOnClickHandler(event){
 	sendResetMailBtn.disabled = true;
 
 	$.ajax({
-		url: "/rest/account/users/passwords/find",
+		url: "/api/account/users/passwords/find",
 		data: data,
 		type: "POST",
 		success:function(res){

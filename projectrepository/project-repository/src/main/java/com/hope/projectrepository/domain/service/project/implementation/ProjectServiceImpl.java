@@ -36,6 +36,9 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectOverview uploadProject(ProjectDTO projectDTO, MultipartFile[] files){
         return projectUploader.uploadProject(projectDTO, files);
     }
+    public ProjectOverview updateProject(ProjectDTO projectDTO, MultipartFile[] files, String projectId){
+        return projectUploader.updateProject(projectDTO, files, projectId);
+    }
 
     public ResponseEntity<byte[]> getFile(String fileId){
         return fileManager.getFile(fileId);

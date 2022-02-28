@@ -1,4 +1,4 @@
-package com.hope.projectrepository.controller.rest;
+package com.hope.projectrepository.controller.api;
 
 import com.hope.projectrepository.util.dto.ProjectContentAndFileInfoDTO;
 import com.hope.projectrepository.util.dto.ProjectDTO;
@@ -16,9 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+// 여유될 때, Restful하게 CRUD 맞춰서 추가하자
 @RestController
-@RequestMapping("/rest/project")
-public class ProjectRestController {
+@RequestMapping("/api/project")
+public class ProjectAPIController {
     @Autowired
     ProjectService projectService;
 
@@ -51,9 +52,8 @@ public class ProjectRestController {
 
     @PostMapping("/projects")
     @ExceptionHandling
-    public String createProject(Model model,
-                         @RequestPart(value="file") MultipartFile[] files,
-                         @RequestPart(value="projectDTO") ProjectDTO projectDTO){
+    public String createProject(@RequestPart(value="file") MultipartFile[] files,
+                                @RequestPart(value="projectDTO") ProjectDTO projectDTO){
         ProjectOverview newOverview = projectService.uploadProject(projectDTO, files);
 
         JsonResponseWrapper jr = new JsonResponseWrapper();
@@ -62,9 +62,21 @@ public class ProjectRestController {
         return jr.getResponse();
     }
 
+    @PutMapping("/projects")
+    @ExceptionHandling
+    public String updateProject(@RequestPart(value="file") MultipartFile[] files,
+                                @RequestPart(value="projectDTO") ProjectDTO projectDTO,
+                                @RequestPart(value="projectId") String projectId){
+        ProjectOverview projectOverview = projectService.updateProject(projectDTO, files, projectId);
+
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        jr.addData("project_overview", projectOverview);
+
+        return jr.getResponse();
+    }
+
     @GetMapping("/files/{fileId}")
-    public ResponseEntity<byte[]> getFile(HttpServletResponse response,
-                                   @PathVariable String fileId){
+    public ResponseEntity<byte[]> getFile(@PathVariable String fileId){
         ResponseEntity<byte[]> entity = projectService.getFile(fileId);
         return entity;
     }

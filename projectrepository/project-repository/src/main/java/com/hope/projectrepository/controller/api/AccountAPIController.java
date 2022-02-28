@@ -1,22 +1,22 @@
-package com.hope.projectrepository.controller.rest;
+package com.hope.projectrepository.controller.api;
 
 import com.hope.projectrepository.util.dto.AccountDTO;
 import com.hope.projectrepository.domain.entity.User;
 import com.hope.projectrepository.domain.service.account.AccountService;
 import com.hope.projectrepository.exception.handle.ExceptionHandling;
+import com.hope.projectrepository.util.global.ContextManager;
 import com.hope.projectrepository.util.response.json.JsonResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-// 여유될 때, RestFul하게 CRUD 맞춰서 추가하자
+// 여유될 때, Restful하게 CRUD 맞춰서 추가하자
 @RestController
-@RequestMapping("/rest/account")
-public class AccountRestController {
+@RequestMapping("/api/account")
+public class AccountAPIController {
     @Autowired
     AccountService accountService;
 
@@ -133,6 +133,18 @@ public class AccountRestController {
         JsonResponseWrapper jr = new JsonResponseWrapper();
         jr.addData("id", loginId);
         jr.addData("password", newPw);
+
+        return jr.getResponse();
+    }
+
+    @GetMapping("/current")
+    @ExceptionHandling
+    public String getCurrentUser(){
+        JsonResponseWrapper jr = new JsonResponseWrapper();
+        User user = ContextManager.getCurrentUser();
+
+        if(user == null) jr.addData("user_id", "guest");
+        else jr.addData("user_id", String.valueOf(user.getUserId()));
 
         return jr.getResponse();
     }

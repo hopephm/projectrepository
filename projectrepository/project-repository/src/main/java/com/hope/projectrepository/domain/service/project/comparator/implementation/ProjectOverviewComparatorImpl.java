@@ -11,8 +11,8 @@ public class ProjectOverviewComparatorImpl implements ProjectOverviewComparator 
         return new Comparator<ProjectOverview>(){
             @Override
             public int compare(ProjectOverview o1, ProjectOverview o2){
-                if(o1.getProjectStartDate().isAfter(o2.getProjectStartDate())) return 1;
-                else if(o1.getProjectStartDate().isBefore(o2.getProjectStartDate())) return -1;
+                if(o1.getProjectStartDate().isAfter(o2.getProjectStartDate())) return -1;
+                else if(o1.getProjectStartDate().isBefore(o2.getProjectStartDate())) return 1;
                 else return 0;
             }
         };
@@ -22,8 +22,8 @@ public class ProjectOverviewComparatorImpl implements ProjectOverviewComparator 
         return new Comparator<ProjectOverview>(){
             @Override
             public int compare(ProjectOverview o1, ProjectOverview o2){
-                if(o1.getProjectEndDate().isAfter(o2.getProjectEndDate())) return 1;
-                else if(o1.getProjectEndDate().isBefore(o2.getProjectEndDate())) return -1;
+                if(o1.getProjectEndDate().isAfter(o2.getProjectEndDate())) return -1;
+                else if(o1.getProjectEndDate().isBefore(o2.getProjectEndDate())) return 1;
                 else return 0;
             }
         };
